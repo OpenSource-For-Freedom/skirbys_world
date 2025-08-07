@@ -123,8 +123,9 @@
     </div>
 
     <script>
-        // Auto-redirect after 10 seconds if user doesn't click
-        let countdown = 10;
+        // Auto-redirect after AUTO_REDIRECT_TIMEOUT seconds if user doesn't click
+        const AUTO_REDIRECT_TIMEOUT = 10;
+        let countdown = AUTO_REDIRECT_TIMEOUT;
         const countdownElement = document.createElement('div');
         countdownElement.className = 'fixed bottom-4 right-4 bg-black/50 text-white px-4 py-2 rounded-lg text-sm';
         document.body.appendChild(countdownElement);
