@@ -1,6 +1,8 @@
 # Skirby's World
 
-Developer: [CyberSynapse](cybersynapse.ro) 
+Developer: [CyberSynapse](https//:www.cybersynapse.ro) 
+
+- Current testable product: https://cybersynapse.ro/Skirby_testing.php
 
 **Play the game live:** https://opensource-for-freedom.github.io/skirbys_world/
 
