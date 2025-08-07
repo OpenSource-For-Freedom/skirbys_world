@@ -1,10 +1,10 @@
 # Skirby's World
 
-Developer: [CyberSynapse](https//:www.cybersynapse.ro) 
+Developer: [CyberSynapse](https://cybersynapse.ro/) 
 
 - Current testable product: https://cybersynapse.ro/Skirby_testing.php
 
-**Play the game live:** https://opensource-for-freedom.github.io/skirbys_world/
+**COMING SOON:** https://opensource-for-freedom.github.io/skirbys_world/
 
 A 2D HTML5 Canvas platformer game featuring Skirby, a blocky character on an adventure through dynamically generated levels. Built as a single self-contained PHP file with embedded JavaScript and CSS.
 
