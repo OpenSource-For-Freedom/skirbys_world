@@ -4,7 +4,7 @@ Always reference these instructions first and fallback to search or bash command
 
 ## Project Overview
 
-Skirby's World is a 2D HTML5 Canvas platformer game built as a single self-contained file (index.php). The game features player movement, collision detection, coin collection, enemies, boss battles, and multiple levels. The entire game logic, styling, and HTML structure are contained within index.php using embedded JavaScript and CSS.
+Skirby's World is a 2D HTML5 Canvas platformer game built with a modular architecture. The game features player movement, collision detection, coin collection, enemies, boss battles, and multiple levels. The game logic is separated into focused modules in the `/src` directory, with public assets in `/public`, and `index.php` serving as the main entry point that coordinates the modular components.
 
 ## Working Effectively
 
@@ -25,8 +25,9 @@ Skirby's World is a 2D HTML5 Canvas platformer game built as a single self-conta
    ```bash
    npm run build
    ```
-   - **Timing**: Takes <1 second. Creates dist/ folder with game files.
+   - **Timing**: Takes <1 second. Creates dist/ folder with game files and modular structure.
    - **NEVER CANCEL**: Even though fast, set timeout to 30+ seconds for safety.
+   - **Output**: Copies index.php, src/, public/, and assets to dist/
 
 4. Run tests:
    ```bash
@@ -81,8 +82,9 @@ Skirby's World is a 2D HTML5 Canvas platformer game built as a single self-conta
    - Verify responsive design scales properly
 
 5. **Build Validation**:
-   - Verify `dist/` folder contains: index.php, IMG_2133.jpeg, LICENSE, README.md
+   - Verify `dist/` folder contains: index.php, src/, public/, IMG_2133.jpeg, LICENSE, README.md
    - Test that built version loads and functions identically to source
+   - Verify modular imports work correctly in built environment
 
 ### Common Commands and Timing
 
@@ -105,25 +107,70 @@ Skirby's World is a 2D HTML5 Canvas platformer game built as a single self-conta
 │   ├── workflows/deploy.yml    # GitHub Pages deployment
 │   └── copilot-instructions.md # This file
 ├── dist/                       # Build output (generated)
-├── IMG_2133.jpeg              # Game screenshot asset
-├── LICENSE                    # MIT license
-├── README.md                  # Project documentation
-├── index.html                 # Copy of index.php for local testing
-├── index.php                  # **MAIN GAME FILE** - entire game
-├── package.json               # Build scripts and metadata
-└── package-lock.json          # Dependency lock file
+│   ├── src/                    # Modular game logic files (copied from src/)
+│   ├── public/                 # Public assets and main game entry (copied from public/)
+│   ├── index.php               # **MAIN ENTRY POINT** - modular game loader
+│   ├── IMG_2133.jpeg           # Game screenshot asset
+│   ├── LICENSE                 # MIT license
+│   └── README.md               # Project documentation
+├── src/                        # **GAME LOGIC MODULES** (8 files, ~1421 lines)
+│   ├── boss.js                 # Boss battle logic and AI
+│   ├── coins.js                # Coin collection mechanics
+│   ├── enemies.js              # Enemy behavior and collision
+│   ├── platforms.js            # Level generation and platform logic
+│   ├── player.js               # Player movement and abilities
+│   ├── sound.js                # Audio system and sound effects
+│   ├── ui.js                   # User interface and shop system
+│   └── utils.js                # Utility functions and rendering helpers
+├── public/                     # **PUBLIC ASSETS AND ENTRY**
+│   ├── game.js                 # Main game coordinator (518 lines)
+│   ├── index.html              # HTML template for game structure
+│   └── styles.css              # Game styling and CSS
+├── IMG_2133.jpeg               # Game screenshot asset
+├── LICENSE                     # MIT license
+├── README.md                   # Project documentation
+├── index.php                   # **MAIN GAME FILE** - modular entry point
+├── index_monolithic.php        # Backup of original monolithic version
+├── package.json                # Build scripts and metadata
+└── package-lock.json           # Dependency lock file
 ```
 
 ### Critical Files to Understand
 
-#### index.php (2004 lines)
-- **Contains**: Complete HTML5 Canvas game with embedded CSS and JavaScript
+#### index.php (~95 lines)
+- **Contains**: HTML5 structure and module loading entry point
+- **Purpose**: Loads modular game components from `public/game.js` and `src/` modules
+- **Key features**:
+  - Responsive game container and UI elements
+  - Loads external CSS from `public/styles.css`
+  - Bootstraps main game module from `public/game.js`
+
+#### public/game.js (518 lines)
+- **Contains**: Main game coordinator and entry point
+- **Purpose**: Imports and coordinates all game modules
 - **Key sections**:
-  - HTML structure and CSS styling (lines 1-400)
-  - Game constants and state management (lines 400-600)
-  - Player class and movement logic (lines 600-1200)
-  - Collision detection and level management (lines 1200-1800)
-  - Game loop and rendering (lines 1800-2004)
+  - Module imports from `/src` directory
+  - Game state management and constants
+  - Main game loop and rendering coordination
+  - Event handling and initialization
+
+#### src/ directory (8 modules, ~1421 total lines)
+- **boss.js** (302 lines): Boss battle logic, AI, and attacks
+- **player.js** (297 lines): Player movement, abilities, and state
+- **platforms.js** (217 lines): Level generation and platform physics
+- **utils.js** (210 lines): Utility functions and rendering helpers
+- **enemies.js** (117 lines): Enemy behavior and collision detection
+- **ui.js** (139 lines): User interface, shop system, and cheat codes
+- **sound.js** (97 lines): Audio system and sound effects
+- **coins.js** (42 lines): Coin collection mechanics
+
+#### public/styles.css
+- **Contains**: Game styling, responsive design, and UI components
+- **Purpose**: Provides visual styling separated from game logic
+
+#### index_monolithic.php (2004 lines) 
+- **Contains**: Backup of original self-contained game version
+- **Purpose**: Fallback reference for the previous monolithic architecture
 
 #### package.json
 - Defines build scripts that GitHub Actions expects
@@ -162,32 +209,41 @@ Skirby's World is a 2D HTML5 Canvas platformer game built as a single self-conta
    - Built files from `dist/` folder are deployed
 
 ### Code Editing Guidelines
-- **Main game logic**: Edit index.php directly
+- **Main game logic**: Edit modules in `src/` directory for specific functionality
+- **Game coordination**: Edit `public/game.js` for main game flow and module coordination
+- **UI and styling**: Edit `public/styles.css` and HTML structure in `index.php`
 - **Build process**: Modify package.json scripts if needed
 - **Deployment**: Update .github/workflows/deploy.yml only if build process changes
 
 ### Game Development Areas
 
-When working on game features, understand these key areas in index.php:
+When working on game features, understand these key modular areas:
 
-1. **Player Movement** (lines ~1000-1100):
-   - WASD/Arrow key handling
-   - Jump mechanics and gravity
-   - Flight and super jump skills
+1. **Player Movement** (`src/player.js`):
+   - WASD/Arrow key handling and input processing
+   - Jump mechanics, gravity, and physics
+   - Flight and super jump skills implementation
+   - Player state management and abilities
 
-2. **Collision Detection** (lines ~1100-1400):
-   - Platform collision resolution
-   - Coin collection logic
-   - Enemy interaction
+2. **Collision Detection** (`src/utils.js` and various modules):
+   - Platform collision resolution in `src/platforms.js`
+   - Coin collection logic in `src/coins.js` 
+   - Enemy interaction in `src/enemies.js`
 
-3. **Level Management** (lines ~1500-1700):
-   - Level data structures
-   - Level progression triggers
-   - Camera movement
+3. **Level Management** (`src/platforms.js`):
+   - Level data structures and generation algorithms
+   - Level progression triggers and transitions
+   - Camera movement and scrolling logic
 
-4. **Game States** (lines ~300-400):
-   - INTRO, PLAYING, BOSS_BATTLE, GAME_OVER states
-   - State transition logic
+4. **Game States** (`public/game.js`):
+   - INTRO, PLAYING, SHOP, BOSS_BATTLE, GAME_OVER states
+   - State transition logic and UI management
+   - Game loop coordination between modules
+
+5. **Audio System** (`src/sound.js`):
+   - Tone.js integration and audio context management
+   - Sound effect triggers and audio feedback
+   - Music and ambient sound coordination
 
 ## Troubleshooting
 
@@ -221,8 +277,10 @@ When working on game features, understand these key areas in index.php:
 ## Performance Considerations
 
 - Game runs at 60 FPS using requestAnimationFrame
-- Single file architecture minimizes HTTP requests
+- Modular architecture enables better code organization and debugging
+- ES6 modules provide efficient loading and tree-shaking capabilities
 - Canvas rendering is optimized for 2D graphics
 - Audio synthesis may impact performance on slower devices
+- Separation of concerns allows targeted performance optimizations
 
 Always validate performance after changes by playing through several levels and monitoring browser performance tools.

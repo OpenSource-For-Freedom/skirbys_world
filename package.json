@@ -5,7 +5,7 @@
   "main": "index.php",
   "scripts": {
     "dev": "python3 -m http.server 8000",
-    "build": "mkdir -p dist && cp index.php dist/ && cp IMG_2133.jpeg dist/ && cp LICENSE dist/ && cp README.md dist/",
+    "build": "mkdir -p dist && cp index.php dist/ && cp -r src dist/ && cp -r public dist/ && cp IMG_2133.jpeg dist/ && cp LICENSE dist/ && cp README.md dist/",
     "test": "echo \"Running game validation tests...\" && npm run test:validate",
     "test:validate": "node -e \"console.log('Game validation: All external dependencies (Tailwind CSS, Tone.js) are loaded via CDN and should be accessible.'); process.exit(0);\"",
     "lint": "echo \"No linting configured for this HTML/JS game.\"",
