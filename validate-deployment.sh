@@ -40,6 +40,7 @@ fi
 echo "📂 Validating dist folder..."
 DIST_FILES=(
     "dist/index.html"
+    "dist/game.html"
     "dist/src/player.js"
     "dist/public/game.js"
     "dist/IMG_2133.jpeg"
