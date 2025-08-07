@@ -48,7 +48,7 @@
 
         <!-- Play Button -->
         <div class="mb-8">
-            <a href="./game.html" class="play-button inline-block px-12 py-4 text-2xl font-bold text-white rounded-full no-underline">
+            <a href="./game.html?autostart=true" class="play-button inline-block px-12 py-4 text-2xl font-bold text-white rounded-full no-underline">
                 ▶️ PLAY NOW
             </a>
         </div>
@@ -111,7 +111,7 @@
             <p class="text-gray-300 mb-4">Collect coins, defeat enemies, and unlock new abilities!</p>
             
             <!-- Alternative Play Button -->
-            <a href="./game.html" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300">
+            <a href="./game.html?autostart=true" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300">
                 🚀 START GAME
             </a>
         </div>
@@ -134,7 +134,7 @@
             countdownElement.textContent = `Auto-starting in ${countdown}s...`;
             countdown--;
             if (countdown < 0) {
-                window.location.href = './game.html';
+                window.location.href = './game.html?autostart=true';
             }
         };
         
