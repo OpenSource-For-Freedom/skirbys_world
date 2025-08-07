@@ -126,14 +126,24 @@
         // Auto-redirect after AUTO_REDIRECT_TIMEOUT seconds if user doesn't click
         const AUTO_REDIRECT_TIMEOUT = 10;
         let countdown = AUTO_REDIRECT_TIMEOUT;
+        let redirectStopped = false; // Flag to prevent redirect after user action
+        
         const countdownElement = document.createElement('div');
         countdownElement.className = 'fixed bottom-4 right-4 bg-black/50 text-white px-4 py-2 rounded-lg text-sm';
         document.body.appendChild(countdownElement);
         
+        const stopAutoRedirect = () => {
+            redirectStopped = true;
+            clearInterval(interval);
+            countdownElement.remove();
+        };
+        
         const updateCountdown = () => {
+            if (redirectStopped) return;
+            
             countdownElement.textContent = `Auto-starting in ${countdown}s...`;
             countdown--;
-            if (countdown < 0) {
+            if (countdown < 0 && !redirectStopped) {
                 window.location.href = './game.html?autostart=true';
             }
         };
@@ -141,14 +151,21 @@
         updateCountdown();
         const interval = setInterval(updateCountdown, 1000);
         
-        // Clear countdown if user clicks the "Play Now" button
-        const playButton = document.querySelector('.play-button');
-        if (playButton) {
-            playButton.addEventListener('click', () => {
-                clearInterval(interval);
-                countdownElement.remove();
-            });
-        }
+        // Stop countdown when user clicks any game link
+        const gameLinks = document.querySelectorAll('a[href*="game.html"]');
+        gameLinks.forEach(link => {
+            link.addEventListener('click', stopAutoRedirect);
+        });
+        
+        // Also stop countdown if user navigates away for any reason
+        window.addEventListener('beforeunload', stopAutoRedirect);
+        
+        // Stop countdown if page becomes hidden (user switches tabs, etc.)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoRedirect();
+            }
+        });
     </script>
 </body>
 </html>
