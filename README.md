@@ -4,7 +4,7 @@ Developer: [CyberSynapse](https://cybersynapse.ro/)
 
 
 ##  **PLAY NOW**
-### **➡️ [CLICK HERE TO PLAY THE GAME](https://opensource-for-freedom.github.io/skirbys_world/) ⬅️**
+### **➡️ [CLICK HERE TO PLAY THE GAME](https://cybersynapse.ro/Skirby_testing.php)) ⬅️**
 
 *Direct link to the live game: https://opensource-for-freedom.github.io/skirbys_world/*
 
