@@ -9,13 +9,14 @@ This document explains how Skirby's World is deployed to GitHub Pages using auto
 ## 📋 Deployment Architecture
 
 ### Overview
-Skirby's World uses GitHub Pages with automated deployment via GitHub Actions. The game is built from a modular ES6 structure and deployed as static HTML/CSS/JS files.
+Skirby's World uses GitHub Pages with automated deployment via GitHub Actions. The game features a landing page entry point and is built from a modular ES6 structure deployed as static HTML/CSS/JS files.
 
 ### Key Components
 
 1. **Source Structure**:
    ```
-   ├── index.php          # Main game file (converted to index.html for deployment)
+   ├── landing.html       # Game landing page (becomes index.html)
+   ├── index.php          # Main game file (converted to game.html for deployment)
    ├── src/              # Modular game logic (8 modules)
    │   ├── boss.js       # Boss battle system
    │   ├── coins.js      # Coin collection mechanics  
@@ -27,19 +28,28 @@ Skirby's World uses GitHub Pages with automated deployment via GitHub Actions. T
    │   └── utils.js      # Utility functions
    └── public/           # Public assets
        ├── game.js       # Main game coordinator
-       ├── index.html    # HTML template
        └── styles.css    # Game styling
    ```
 
 2. **Build Output** (`dist/` folder):
    ```
-   ├── index.html        # Converted from index.php
+   ├── index.html        # Landing page (from landing.html)
+   ├── game.html         # Main game (converted from index.php)
    ├── src/             # Copied game modules
    ├── public/          # Copied public assets
    ├── IMG_2133.jpeg    # Game screenshot
    ├── LICENSE          # License file
-   └── README.md        # Documentation
+   ├── README.md        # Documentation
+   └── DEPLOYMENT.md    # This deployment guide
    ```
+
+## 🎮 Game Access
+
+### User Experience
+1. **Visit**: https://opensource-for-freedom.github.io/skirbys_world/
+2. **Landing Page**: Beautiful game introduction with play buttons
+3. **Game Launch**: Click "PLAY NOW" to start the game
+4. **Auto-Start**: Page automatically redirects to game after 10 seconds
 
 ## 🔧 Deployment Process
 
