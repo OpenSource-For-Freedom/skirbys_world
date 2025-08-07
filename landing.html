@@ -141,11 +141,14 @@
         updateCountdown();
         const interval = setInterval(updateCountdown, 1000);
         
-        // Clear countdown if user interacts
-        document.addEventListener('click', () => {
-            clearInterval(interval);
-            countdownElement.remove();
-        });
+        // Clear countdown if user clicks the "Play Now" button
+        const playButton = document.querySelector('.play-button');
+        if (playButton) {
+            playButton.addEventListener('click', () => {
+                clearInterval(interval);
+                countdownElement.remove();
+            });
+        }
     </script>
 </body>
 </html>
