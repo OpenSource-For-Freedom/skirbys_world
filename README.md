@@ -2,9 +2,11 @@
 
 Developer: [CyberSynapse](https://cybersynapse.ro/) 
 
-- Current testable product: (https://cybersynapse.ro/Skirby_testing.php)
 
-**COMING SOON:** https://opensource-for-freedom.github.io/skirbys_world/
+##  **PLAY NOW**
+### **➡️ [CLICK HERE TO PLAY THE GAME](https://opensource-for-freedom.github.io/skirbys_world/) ⬅️**
+
+*Direct link to the live game: https://opensource-for-freedom.github.io/skirbys_world/*
 
 A 2D HTML5 Canvas platformer game featuring Skirby, a blocky character on an adventure through dynamically generated levels. Built as a single self-contained PHP file with embedded JavaScript and CSS.
 
@@ -43,38 +45,44 @@ Skirby's World is a classic 2D platformer where you control Skirby, a red blocky
 3. Avoid or defeat purple enemies
 4. Reach the golden exit platform to advance to the next level
 5. Visit the shop between levels to purchase new skills
-6. Face the boss battle after progressing through levels
-
-### Cheat Codes
-- `level2` - Jump to level 2
-- `level3` - Jump to level 3  
-- `add100` - Add 100 coins
-- `boss` - Go directly to boss battle
+6. Face the boss battle after progressing through boss battle
 
 ## Development
 
 ### Prerequisites
 - Python 3 (for local development server)
-- Node.js and npm (for build scripts)
+- Node.js and npm (for build scripts and validation)
 - Modern web browser with HTML5 Canvas support
 
-### Running Locally
+### Running Locally (Coming Soon)
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Start development server: `npm run dev`
 4. Open http://localhost:8000/index.php in your browser
 
-### Building for Production
+### Building for 
 - Build the game: `npm run build`
 - Built files will be placed in the `dist/` folder
 - Run tests: `npm test`
+- Validate deployment: `./validate-deployment.sh`
+
+### Deployment to GitHub Pages
+The game automatically deploys to GitHub Pages when pushed to the `main` branch:
+
+1. **Push to main** → Triggers GitHub Actions workflow
+2. **Build process** → Creates optimized `dist/` folder  
+3. **Deploy** → Publishes to GitHub Pages
+4. **Live game** → Available at repository GitHub Pages URL
+
+For detailed deployment information, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ### Technical Details
-- Built with HTML5 Canvas and vanilla JavaScript
-- Uses Tailwind CSS for styling
-- Audio powered by Tone.js
-- Single file architecture (index.php contains the entire game)
-- Automatic deployment to GitHub Pages via GitHub Actions
+- **Modular Architecture**: ES6 modules for organized code structure
+- **HTML5 Canvas**: High-performance 2D game rendering
+- **Responsive Design**: Tailwind CSS for mobile/desktop compatibility
+- **Audio System**: Tone.js for dynamic sound effects
+- **Build System**: Automated build validation and deployment
+- **GitHub Pages**: Automated deployment via GitHub Actions
 
 ## License
 
