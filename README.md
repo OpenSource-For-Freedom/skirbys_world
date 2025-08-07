@@ -53,7 +53,7 @@ Skirby's World is a classic 2D platformer where you control Skirby, a red blocky
 
 ### Prerequisites
 - Python 3 (for local development server)
-- Node.js and npm (for build scripts)
+- Node.js and npm (for build scripts and validation)
 - Modern web browser with HTML5 Canvas support
 
 ### Running Locally
@@ -66,13 +66,25 @@ Skirby's World is a classic 2D platformer where you control Skirby, a red blocky
 - Build the game: `npm run build`
 - Built files will be placed in the `dist/` folder
 - Run tests: `npm test`
+- Validate deployment: `./validate-deployment.sh`
+
+### Deployment to GitHub Pages
+The game automatically deploys to GitHub Pages when pushed to the `main` branch:
+
+1. **Push to main** → Triggers GitHub Actions workflow
+2. **Build process** → Creates optimized `dist/` folder  
+3. **Deploy** → Publishes to GitHub Pages
+4. **Live game** → Available at repository GitHub Pages URL
+
+For detailed deployment information, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ### Technical Details
-- Built with HTML5 Canvas and vanilla JavaScript
-- Uses Tailwind CSS for styling
-- Audio powered by Tone.js
-- Single file architecture (index.php contains the entire game)
-- Automatic deployment to GitHub Pages via GitHub Actions
+- **Modular Architecture**: ES6 modules for organized code structure
+- **HTML5 Canvas**: High-performance 2D game rendering
+- **Responsive Design**: Tailwind CSS for mobile/desktop compatibility
+- **Audio System**: Tone.js for dynamic sound effects
+- **Build System**: Automated build validation and deployment
+- **GitHub Pages**: Automated deployment via GitHub Actions
 
 ## License
 

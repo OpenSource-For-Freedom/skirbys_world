@@ -5,9 +5,12 @@
   "main": "index.php",
   "scripts": {
     "dev": "python3 -m http.server 8000",
-    "build": "mkdir -p dist && cp -r src dist/ && cp -r public dist/ && cp index.php dist/index.html && cp IMG_2133.jpeg dist/ && cp LICENSE dist/ && cp README.md dist/",
-    "test": "echo \"Running game validation tests...\" && npm run test:validate",
-    "test:validate": "node -e \"console.log('Game validation: All external dependencies (Tailwind CSS, Tone.js) are loaded via CDN and should be accessible.'); process.exit(0);\"",
+    "build": "npm run clean && npm run build:copy && npm run build:validate",
+    "build:copy": "mkdir -p dist && cp -r src dist/ && cp -r public dist/ && cp index.php dist/index.html && cp IMG_2133.jpeg dist/ && cp LICENSE dist/ && cp README.md dist/ && cp DEPLOYMENT.md dist/",
+    "build:validate": "node -e \"const fs = require('fs'); const files = ['dist/index.html', 'dist/src/player.js', 'dist/public/game.js']; files.forEach(f => { if (!fs.existsSync(f)) { console.error('Build validation failed: Missing', f); process.exit(1); } }); console.log('✅ Build validation passed: All required files exist');\"",
+    "test": "echo \"Running game validation tests...\" && npm run test:validate && npm run test:deployment",
+    "test:validate": "node -e \"console.log('Game validation: All external dependencies (Tailwind CSS, Tone.js) are loaded via CDN and should be accessible.');\"",
+    "test:deployment": "node -e \"const fs = require('fs'); console.log('Deployment test: Checking modular structure...'); const modules = ['src/player.js', 'src/platforms.js', 'src/boss.js']; modules.forEach(m => { if (!fs.existsSync(m)) { console.error('❌ Missing module:', m); process.exit(1); } }); console.log('✅ All game modules present for deployment');\"",
     "lint": "echo \"No linting configured for this HTML/JS game.\"",
     "clean": "rm -rf dist",
     "serve": "npm run dev"
