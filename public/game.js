@@ -517,3 +517,25 @@ function initializeGame() {
 
 // Start the game when the page loads
 initializeGame();
+
+// Check for autostart parameter and automatically start the game
+function checkAutostart() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('autostart') === 'true') {
+        // Auto-start the game after a brief moment
+        setTimeout(() => {
+            const ToneLib = typeof Tone !== 'undefined' ? Tone : { start: () => Promise.resolve() };
+            ToneLib.start().then(() => {
+                console.log("AudioContext resumed (autostart)!");
+                loadingOverlay.classList.remove('hidden');
+                setTimeout(() => {
+                    resetGame();
+                    setGameState(GAME_STATE.PLAYING);
+                }, 500); // Shorter delay for autostart
+            }).catch(e => console.error("Error resuming AudioContext:", e));
+        }, 100); // Very brief delay to ensure page is loaded
+    }
+}
+
+// Check for autostart after initialization
+checkAutostart();
