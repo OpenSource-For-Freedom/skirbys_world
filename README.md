@@ -1,8 +1,9 @@
-# 🎮 Skirby's World
+# Skirby's World
 
-Developer: [CyberSynapse](cybersynapse.ro) 
+Developer: [CyberSynapse](https://cybersynapse.ro/) 
 
-## 🚀 **PLAY NOW**
+
+##  **PLAY NOW**
 ### **➡️ [CLICK HERE TO PLAY THE GAME](https://opensource-for-freedom.github.io/skirbys_world/) ⬅️**
 
 *Direct link to the live game: https://opensource-for-freedom.github.io/skirbys_world/*
@@ -44,13 +45,7 @@ Skirby's World is a classic 2D platformer where you control Skirby, a red blocky
 3. Avoid or defeat purple enemies
 4. Reach the golden exit platform to advance to the next level
 5. Visit the shop between levels to purchase new skills
-6. Face the boss battle after progressing through levels
-
-### Cheat Codes
-- `level2` - Jump to level 2
-- `level3` - Jump to level 3  
-- `add100` - Add 100 coins
-- `boss` - Go directly to boss battle
+6. Face the boss battle after progressing through boss battle
 
 ## Development
 
@@ -59,13 +54,13 @@ Skirby's World is a classic 2D platformer where you control Skirby, a red blocky
 - Node.js and npm (for build scripts and validation)
 - Modern web browser with HTML5 Canvas support
 
-### Running Locally
+### Running Locally (Coming Soon)
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Start development server: `npm run dev`
 4. Open http://localhost:8000/index.php in your browser
 
-### Building for Production
+### Building for 
 - Build the game: `npm run build`
 - Built files will be placed in the `dist/` folder
 - Run tests: `npm test`
