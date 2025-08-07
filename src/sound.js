@@ -1,5 +1,23 @@
 // Sound effects module using Tone.js
 
+// Mock Tone.js for testing when CDN is not available
+const MockTone = {
+    Synth: class {
+        constructor(options) {
+            this.options = options;
+        }
+        toDestination() { return this; }
+        triggerAttackRelease(note, duration, time) {
+            console.log(`Playing sound: ${note} for ${duration} at ${time || 'now'}`);
+        }
+    },
+    start: () => Promise.resolve(),
+    now: () => 0
+};
+
+// Use global Tone if available, otherwise use mock
+const ToneLib = typeof Tone !== 'undefined' ? Tone : MockTone;
+
 let jumpSound;
 let walkSound;
 let enemyHitSound; // When player jumps on enemy
@@ -10,7 +28,7 @@ let enemyDeathSound; // When enemy drops off screen
  */
 export function setupSounds() {
     // Jump Sound: A short, rising tone
-    jumpSound = new Tone.Synth({
+    jumpSound = new ToneLib.Synth({
         oscillator: { type: "triangle" },
         envelope: {
             attack: 0.01,
@@ -21,7 +39,7 @@ export function setupSounds() {
     }).toDestination();
 
     // Walk Sound: A very short, low frequency click/thump
-    walkSound = new Tone.Synth({
+    walkSound = new ToneLib.Synth({
         oscillator: { type: "sine" },
         envelope: {
             attack: 0.005,
@@ -32,7 +50,7 @@ export function setupSounds() {
     }).toDestination();
 
     // Enemy Hit Sound (when jumped on): A quick, sharp pop
-    enemyHitSound = new Tone.Synth({
+    enemyHitSound = new ToneLib.Synth({
         oscillator: { type: "square" },
         envelope: {
             attack: 0.001,
@@ -43,7 +61,7 @@ export function setupSounds() {
     }).toDestination();
 
     // Enemy Death Sound (when dropping off): A descending, fading tone
-    enemyDeathSound = new Tone.Synth({
+    enemyDeathSound = new ToneLib.Synth({
         oscillator: { type: "sawtooth" },
         envelope: {
             attack: 0.01,
@@ -76,5 +94,5 @@ export function playEnemyHitSound() {
 /** Plays the enemy death sound. */
 export function playEnemyDeathSound() {
     enemyDeathSound.triggerAttackRelease("C4", "0.5"); // C4, half second fade
-    enemyDeathSound.triggerAttackRelease("C3", "0.8", Tone.now() + 0.2); // Descend to C3 after a delay
+    enemyDeathSound.triggerAttackRelease("C3", "0.8", ToneLib.now() + 0.2); // Descend to C3 after a delay
 }

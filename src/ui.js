@@ -65,14 +65,14 @@ export function setupShopButtons(player, updateUICallback) {
 export function handleCheatCode(code, gameState, resetLevelElements, updateUICallback, setGameState, displayMessageBox, startBossBattle, gameContainer) {
     switch (code) {
         case 'level2':
-            gameState.currentLevel = 2;
+            gameState.setCurrentLevel(2);
             resetLevelElements(); // Resets player position and generates new level
             updateUICallback(); // Update UI immediately
             setGameState('playing');
             displayMessageBox('Cheat Activated!', 'Jumped to Level 2!', gameContainer);
             break;
         case 'level3':
-            gameState.currentLevel = 3;
+            gameState.setCurrentLevel(3);
             resetLevelElements(); // Resets player position and new level
             updateUICallback(); // Update UI immediately
             setGameState('playing');
@@ -84,7 +84,7 @@ export function handleCheatCode(code, gameState, resetLevelElements, updateUICal
             displayMessageBox('Cheat Activated!', '100 coins added!', gameContainer);
             break;
         case 'boss': // New cheat code for boss battle
-            gameState.currentLevel = 3; // Ensure level is set to 3 to correctly reflect progression
+            gameState.setCurrentLevel(3); // Ensure level is set to 3 to correctly reflect progression
             updateUICallback(); // Update UI immediately
             displayMessageBox('Cheat Activated!', 'Teleporting to Boss Battle!', gameContainer);
             startBossBattle(); // Directly start the boss battle
