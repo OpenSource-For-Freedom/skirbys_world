@@ -91,3 +91,6 @@ MIT License - see LICENSE file for details
 ## Author
 
 Tim Burns
+
+## Contact
+office@cybersynapse.ro
