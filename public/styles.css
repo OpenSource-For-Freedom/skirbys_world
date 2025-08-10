@@ -1,6 +1,8 @@
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #87CEEB; /* Sky blue background */
+    background: linear-gradient(45deg, #FF69B4, #87CEEB, #98FB98, #FFB6C1, #F0E68C, #DDA0DD);
+    background-size: 400% 400%;
+    animation: kirbyGradient 12s ease infinite;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,12 +10,58 @@ body {
     margin: 0;
     overflow: hidden; /* Prevent scrollbars */
     color: #333;
+    position: relative;
+}
+
+@keyframes kirbyGradient {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 100% 50%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
+/* Animated stars background */
+body::before {
+    content: '⭐ ✨ 🌟 💫 ⭐ ✨ 🌟 💫 ⭐ ✨';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    color: rgba(255, 215, 0, 0.6);
+    z-index: -1;
+    animation: sparkle 4s ease-in-out infinite;
+    display: flex;
+    justify-content: space-around;
+    align-items: space-around;
+    flex-wrap: wrap;
+    pointer-events: none;
 }
 
 #game-container {
-    background-color: #A0D2EB; /* Lighter blue for game area */
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 0 10px rgba(255, 255, 255, 0.3); /* Outer glow for Lego feel */
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.9), rgba(173, 216, 230, 0.9));
+    border-radius: 25px;
+    box-shadow: 
+        0 15px 35px rgba(255, 105, 180, 0.4), 
+        0 0 0 8px rgba(255, 255, 255, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.2); /* Inner glow for magical feel */
     overflow: hidden;
     position: relative;
     width: 90vw; /* Responsive width */
@@ -23,15 +71,20 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation: float 8s ease-in-out infinite;
+    border: 4px solid rgba(255, 215, 0, 0.6);
 }
 
 canvas {
-    background-color: #BEE3F8; /* Even lighter blue for canvas background */
+    background: linear-gradient(180deg, #87CEEB 0%, #98FB98 50%, #F0E68C 100%); /* Sky to grass gradient */
     display: block;
-    border-radius: 15px;
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+    border-radius: 20px;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.1),
+        0 0 15px rgba(255, 215, 0, 0.3); /* Magical glow */
     width: 100%; /* Canvas fills its container */
     height: 100%;
+    border: 3px solid rgba(255, 255, 255, 0.5);
 }
 
 #intro-menu, #game-ui, #game-over-ui, #boss-battle-ui {
@@ -44,10 +97,11 @@ canvas {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay */
+    background: linear-gradient(135deg, rgba(255, 105, 180, 0.85), rgba(138, 43, 226, 0.85));
     color: white;
     z-index: 100;
-    border-radius: 20px; /* Match container border-radius */
+    border-radius: 25px; /* Match container border-radius */
+    backdrop-filter: blur(10px);
 }
 
 /* Specific styling for the shop UI to ensure elements fit */
@@ -62,13 +116,14 @@ canvas {
     /* Changed from space-between to center, and manage spacing with margins */
     justify-content: center; /* Center content vertically */
     align-items: center; /* Center horizontally */
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay */
+    background: linear-gradient(135deg, rgba(50, 205, 50, 0.85), rgba(255, 215, 0, 0.85));
     color: white;
     z-index: 100;
-    border-radius: 20px;
+    border-radius: 25px;
     padding: 20px; /* Add some padding around the content */
     box-sizing: border-box; /* Include padding in the element's total width and height */
     overflow-y: auto; /* Allow scrolling if content truly overflows */
+    backdrop-filter: blur(10px);
 }
 
 .hidden {
@@ -76,22 +131,50 @@ canvas {
 }
 
 .button-primary {
-    background-color: #FFD700; /* Gold-like color */
-    color: #8B4513; /* SaddleBrown for text */
-    padding: 15px 30px;
-    border-radius: 10px;
-    font-size: 1.5rem;
-    font-weight: bold;
+    background: linear-gradient(45deg, #FF1493, #FFD700, #FF69B4);
+    background-size: 200% 200%;
+    animation: kirbyGradient 3s ease infinite, pulse 2s ease-in-out infinite;
+    color: white;
+    padding: 18px 35px;
+    border-radius: 25px;
+    font-size: 1.6rem;
+    font-weight: 900;
     cursor: pointer;
-    border: 3px solid #DAA520; /* Darker gold border */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    border: 4px solid #FFB6C1;
+    box-shadow: 
+        0 8px 15px rgba(255, 20, 147, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.button-primary::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: rotate(45deg);
+    animation: buttonShine 2s linear infinite;
+}
+
+@keyframes buttonShine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 .button-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 12px 25px rgba(255, 20, 147, 0.6),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+    animation: pulse 0.5s ease-in-out infinite;
 }
 
 .game-info {
@@ -99,21 +182,29 @@ canvas {
     top: 20px;
     left: 20px;
     display: flex;
-    gap: 20px;
-    font-size: 1.2rem;
+    gap: 25px;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #333;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 182, 193, 0.95));
+    padding: 15px 25px;
+    border-radius: 20px;
+    box-shadow: 
+        0 5px 15px rgba(255, 105, 180, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5);
     z-index: 50;
+    border: 3px solid rgba(255, 215, 0, 0.7);
+    animation: float 6s ease-in-out infinite;
 }
 
 .game-info span {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    border: 2px solid rgba(255, 215, 0, 0.5);
 }
 
 /* Basic styling for Lego-like elements */

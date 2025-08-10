@@ -9,47 +9,170 @@
     <style>
         body { 
             font-family: 'Inter', sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(45deg, #FF69B4, #87CEEB, #98FB98, #FFB6C1, #F0E68C);
+            background-size: 300% 300%;
+            animation: gradientShift 8s ease infinite;
             min-height: 100vh;
+            overflow-x: hidden;
         }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+        
         .game-card {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 192, 203, 0.15));
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
+            animation: float 6s ease-in-out infinite;
         }
+        
         .play-button {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            background: linear-gradient(45deg, #FF1493, #FF69B4, #FFB6C1);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite, bounce 2s ease-in-out infinite;
             transition: all 0.3s ease;
             transform: scale(1);
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+            border: 3px solid #FFB6C1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 900;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 2s linear infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
         .play-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.6);
+            animation: bounce 0.5s ease-in-out infinite;
         }
+        
         .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
+            background: linear-gradient(135deg, rgba(152, 251, 152, 0.2), rgba(135, 206, 235, 0.2));
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .feature-card:nth-child(2n) {
+            animation-delay: -1s;
+        }
+        
+        .feature-card:nth-child(3n) {
+            animation-delay: -2s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 25px rgba(255, 105, 180, 0.3);
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.3), rgba(255, 105, 180, 0.2));
+        }
+        
+        .kirby-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            color: #FFD700;
+            font-size: 20px;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+        
+        .star:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .star:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
+        .star:nth-child(3) { top: 60%; left: 5%; animation-delay: 1s; }
+        .star:nth-child(4) { top: 80%; right: 10%; animation-delay: 1.5s; }
+        .star:nth-child(5) { top: 40%; right: 25%; animation-delay: 2s; }
+        .star:nth-child(6) { top: 15%; left: 70%; animation-delay: 2.5s; }
+        
+        .game-title {
+            background: linear-gradient(45deg, #FF1493, #FFD700, #FF69B4, #98FB98);
+            background-size: 300% 300%;
+            animation: gradientShift 4s ease infinite;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+            animation: bounce 3s ease-in-out infinite;
+        }
+        
+        .controls-section {
+            background: linear-gradient(135deg, rgba(240, 230, 140, 0.2), rgba(255, 182, 193, 0.2));
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
-    <div class="game-card rounded-3xl p-8 max-w-4xl w-full text-center text-white shadow-2xl">
+    <!-- Animated background stars -->
+    <div class="kirby-stars">
+        <div class="star">⭐</div>
+        <div class="star">✨</div>
+        <div class="star">🌟</div>
+        <div class="star">💫</div>
+        <div class="star">⭐</div>
+        <div class="star">✨</div>
+    </div>
+    
+    <div class="game-card rounded-3xl p-8 max-w-4xl w-full text-center text-white shadow-2xl relative z-10">
         <!-- Game Title -->
-        <h1 class="text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500">
-            🎮 Skirby's World
+        <h1 class="game-title text-6xl font-extrabold mb-4">
+            🌟 Skirby's World 🌟
         </h1>
         
         <!-- Game Description -->
-        <p class="text-xl mb-8 text-gray-200 max-w-2xl mx-auto">
-            Help Skirby on his blocky adventure! A 2D platformer featuring procedurally generated levels, 
-            skill upgrades, and epic boss battles.
+        <p class="text-xl mb-8 text-white font-bold max-w-2xl mx-auto drop-shadow-lg">
+            Help Skirby on his magical blocky adventure! 🎈 A vibrant 2D platformer featuring 
+            procedurally generated levels, amazing skill upgrades, and epic boss battles! ⭐
         </p>
 
         <!-- Play Button -->
         <div class="mb-8">
-            <a href="./game.html?autostart=true" class="play-button inline-block px-12 py-4 text-2xl font-bold text-white rounded-full no-underline">
-                ▶️ PLAY NOW
+            <a href="./game.html?autostart=true" class="play-button inline-block px-12 py-4 text-2xl font-bold text-white rounded-full no-underline relative z-10">
+                🚀 PLAY NOW! 🚀
             </a>
         </div>
 
@@ -83,20 +206,20 @@
         </div>
 
         <!-- Game Controls -->
-        <div class="text-left max-w-2xl mx-auto mb-8">
+        <div class="controls-section text-left max-w-2xl mx-auto mb-8 p-6 rounded-2xl">
             <h3 class="text-2xl font-bold mb-4 text-center">🎮 How to Play</h3>
             <div class="grid md:grid-cols-2 gap-4 text-sm">
                 <div>
-                    <h4 class="font-bold text-yellow-400 mb-2">Movement:</h4>
-                    <ul class="space-y-1 text-gray-300">
+                    <h4 class="font-bold text-yellow-300 mb-2">🏃‍♂️ Movement:</h4>
+                    <ul class="space-y-1 text-white font-semibold">
                         <li>• A/D or Arrow Keys: Move</li>
                         <li>• Spacebar: Jump</li>
                         <li>• W/S: Fly (with Flight skill)</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-yellow-400 mb-2">Combat:</h4>
-                    <ul class="space-y-1 text-gray-300">
+                    <h4 class="font-bold text-yellow-300 mb-2">⚔️ Combat:</h4>
+                    <ul class="space-y-1 text-white font-semibold">
                         <li>• E: Spin Attack</li>
                         <li>• F: Punch Power</li>
                         <li>• C: Cheat Codes</li>
@@ -107,12 +230,12 @@
 
         <!-- Quick Start -->
         <div class="border-t border-white/20 pt-6">
-            <p class="text-lg font-semibold mb-2">Ready to begin your adventure?</p>
-            <p class="text-gray-300 mb-4">Collect coins, defeat enemies, and unlock new abilities!</p>
+            <p class="text-lg font-semibold mb-2 text-white">Ready to begin your magical adventure? ✨</p>
+            <p class="text-pink-200 mb-4 font-semibold">Collect coins, defeat enemies, and unlock amazing new abilities! 🌈</p>
             
             <!-- Alternative Play Button -->
-            <a href="./game.html?autostart=true" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300">
-                🚀 START GAME
+            <a href="./game.html?autostart=true" class="inline-block bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                🌟 START ADVENTURE 🌟
             </a>
         </div>
 
