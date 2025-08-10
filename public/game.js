@@ -522,18 +522,57 @@ initializeGame();
 function checkAutostart() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('autostart') === 'true') {
+        console.log("Autostart requested - starting game...");
+        
+        // Show a message that autostart is happening
+        if (introMenu && !introMenu.classList.contains('hidden')) {
+            const autostartMessage = document.createElement('div');
+            autostartMessage.className = 'text-center mt-4 text-yellow-300 font-bold';
+            autostartMessage.innerHTML = '🎮 Starting your adventure... 🎮';
+            introMenu.appendChild(autostartMessage);
+            
+            setTimeout(() => {
+                if (autostartMessage.parentNode) {
+                    autostartMessage.remove();
+                }
+            }, 3000);
+        }
+        
         // Auto-start the game after a brief moment
         setTimeout(() => {
+            // Try to start audio context, but don't let it block the game
             const ToneLib = typeof Tone !== 'undefined' ? Tone : { start: () => Promise.resolve() };
             ToneLib.start().then(() => {
                 console.log("AudioContext resumed (autostart)!");
-                loadingOverlay.classList.remove('hidden');
-                setTimeout(() => {
-                    resetGame();
-                    setGameState(GAME_STATE.PLAYING);
-                }, 500); // Shorter delay for autostart
-            }).catch(e => console.error("Error resuming AudioContext:", e));
+            }).catch(e => {
+                console.warn("AudioContext autostart failed (this is normal in restricted environments):", e);
+            });
+            
+            // Start the game regardless of audio status
+            loadingOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                resetGame();
+                setGameState(GAME_STATE.PLAYING);
+                console.log("Game started via autostart!");
+            }, 500); // Shorter delay for autostart
         }, 100); // Very brief delay to ensure page is loaded
+        
+        // Fallback: If autostart doesn't work after reasonable time, ensure start button is prominent
+        setTimeout(() => {
+            if (currentState === GAME_STATE.INTRO && introMenu && !introMenu.classList.contains('hidden')) {
+                console.warn("Autostart may have failed - ensuring start button is visible");
+                const startBtn = document.getElementById('startButton');
+                if (startBtn) {
+                    startBtn.style.animation = 'bounce 1s ease-in-out infinite';
+                    startBtn.classList.add('bg-red-500', 'hover:bg-red-600');
+                    
+                    const fallbackMessage = document.createElement('div');
+                    fallbackMessage.className = 'text-center mt-4 text-red-300 font-bold';
+                    fallbackMessage.innerHTML = '⚠️ Click the button above to start! ⚠️';
+                    introMenu.appendChild(fallbackMessage);
+                }
+            }
+        }, 3000); // Give autostart 3 seconds to work
     }
 }
 
