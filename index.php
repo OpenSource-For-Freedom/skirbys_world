@@ -21,8 +21,7 @@
 
         <!-- Intro Menu -->
         <div id="intro-menu">
-            <h1 class="text-6xl font-extrabold mb-8 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); background: linear-gradient(45deg, #FF1493, #FFD700, #FF69B4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">🌟 Skirbys World 🌟</h1>
-            <p class="text-2xl mb-12 text-white font-bold drop-shadow-lg">Help Skirby on his magical blocky adventure! ✨</p>
+            <p class="text-3xl mb-12 text-white font-bold drop-shadow-lg">Ready to begin your magical adventure? ✨</p>
             <button id="startButton" class="button-primary">🚀 Start Adventure 🚀</button>
         </div>
 
