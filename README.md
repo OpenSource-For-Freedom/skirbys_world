@@ -1,4 +1,4 @@
-# Skirby's World
+# Skirbys World
 
 Developer: [CyberSynapse](https://cybersynapse.ro/) 
 
@@ -10,11 +10,11 @@ GitHub Pages URL: https://opensource-for-freedom.github.io/skirbys_world/
 
 A vibrant 2D HTML5 Canvas platformer game featuring Skirby, a blocky character on a magical adventure through dynamically generated levels. Built with a immersive Super Mario/Kirby-inspired visual theme featuring bright colors, animated UI elements, and engaging visual effects. The game is designed as a pure web experience with no downloads required.
 
-![Skirby's World Screenshot](IMG_2133.jpeg)
+![Skirbys World Screenshot](IMG_2133.jpeg)
 
 ## About the Game
 
-Skirby's World is a classic 2D platformer where you control Skirby, a red blocky character, as he jumps through procedurally generated levels collecting coins and avoiding enemies. The game features a skill system where you can spend collected coins to unlock new abilities.
+Skirbys World is a classic 2D platformer where you control Skirby, a red blocky character, as he jumps through procedurally generated levels collecting coins and avoiding enemies. The game features a skill system where you can spend collected coins to unlock new abilities.
 
 ## Game Features
 
@@ -86,7 +86,7 @@ Simply visit the live game at the GitHub Pages URL above and start playing immed
 
 ## Browser Compatibility
 
-Skirby's World works best in modern web browsers:
+Skirbys World works best in modern web browsers:
 - ✅ **Chrome 80+** (Recommended)
 - ✅ **Firefox 75+** 
 - ✅ **Safari 13+**

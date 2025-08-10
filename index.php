@@ -21,8 +21,7 @@
 
         <!-- Intro Menu -->
         <div id="intro-menu">
-            <h1 class="text-6xl font-extrabold mb-8 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); background: linear-gradient(45deg, #FF1493, #FFD700, #FF69B4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">🌟 Skirby's World 🌟</h1>
-            <p class="text-2xl mb-12 text-white font-bold drop-shadow-lg">Help Skirby on his magical blocky adventure! ✨</p>
+            <p class="text-3xl mb-12 text-white font-bold drop-shadow-lg">Ready to begin your magical adventure? ✨</p>
             <button id="startButton" class="button-primary">🚀 Start Adventure 🚀</button>
         </div>
 
@@ -38,7 +37,7 @@
 
         <!-- Shop UI (Initially hidden) -->
         <div id="shop-ui" class="hidden">
-            <h2 class="text-5xl font-extrabold my-4 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(50, 205, 50, 0.8);">💫 Skirby's Skill Shop 💫</h2>
+            <h2 class="text-5xl font-extrabold my-4 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(50, 205, 50, 0.8);">💫 Skirbys Skill Shop 💫</h2>
             <p class="text-xl mb-8 text-white font-bold drop-shadow-lg">Spend your coins wisely! ✨</p>
             <!-- Modified grid for responsiveness -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl my-auto">
@@ -73,7 +72,7 @@
         <!-- Game Over UI (Initially hidden) -->
         <div id="game-over-ui" class="hidden">
             <h2 class="text-6xl font-extrabold mb-8 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(255, 69, 0, 0.8); background: linear-gradient(45deg, #FF4500, #FF6347); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">💀 Game Over! 💀</h2>
-            <p class="text-2xl mb-12 text-white font-bold drop-shadow-lg">Skirby's adventure has ended... 😢</p>
+            <p class="text-2xl mb-12 text-white font-bold drop-shadow-lg">Skirbys adventure has ended... 😢</p>
             <button id="restartButton" class="button-primary">🔄 Try Again 🔄</button>
         </div>
 
