@@ -1,4 +1,4 @@
-# Skirby's World
+# Skirbys World
 
 Developer: [CyberSynapse](https://cybersynapse.ro/) 
 
