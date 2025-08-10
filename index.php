@@ -21,7 +21,8 @@
 
         <!-- Intro Menu -->
         <div id="intro-menu">
-            <p class="text-3xl mb-12 text-white font-bold drop-shadow-lg">Ready to begin your magical adventure? ✨</p>
+            <h1 class="game-title">🌟 SKIRBY'S WORLD 🌟</h1>
+            <p class="text-3xl mb-12 text-white font-bold drop-shadow-lg game-subtitle">Ready to begin your magical adventure? ✨</p>
             <button id="startButton" class="button-primary">🚀 Start Adventure 🚀</button>
         </div>
 
@@ -41,25 +42,25 @@
             <p class="text-xl mb-8 text-white font-bold drop-shadow-lg">Spend your coins wisely! ✨</p>
             <!-- Modified grid for responsiveness -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl my-auto">
-                <div class="p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #1E90FF, #87CEEB); animation: float 4s ease-in-out infinite;">
+                <div class="shop-skill-card p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #1E90FF, #87CEEB);">
                     <h3 class="text-3xl font-bold text-white mb-2">🚀 Super Jump</h3>
                     <p class="text-lg text-blue-100 mb-4 font-semibold">Jump even higher!</p>
                     <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">💰 Cost: 20 Coins</p>
                     <button class="button-primary buy-skill-btn" data-skill="superJump" data-cost="20">Buy Now!</button>
                 </div>
-                <div class="p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #FF6347, #FF4500); animation: float 4s ease-in-out infinite; animation-delay: -1s;">
+                <div class="shop-skill-card p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #FF6347, #FF4500);">
                     <h3 class="text-3xl font-bold text-white mb-2">🌪️ Spin Attack</h3>
                     <p class="text-lg text-red-100 mb-4 font-semibold">Defeat enemies with a spin!</p>
                     <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">💰 Cost: 30 Coins</p>
                     <button class="button-primary buy-skill-btn" data-skill="spinAttack" data-cost="30">Buy Now!</button>
                 </div>
-                 <div class="p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #9932CC, #DDA0DD); animation: float 4s ease-in-out infinite; animation-delay: -2s;">
+                 <div class="shop-skill-card p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #9932CC, #DDA0DD);">
                     <h3 class="text-3xl font-bold text-white mb-2">👊 Punch Power</h3>
                     <p class="text-lg text-purple-100 mb-4 font-semibold">One-shot most enemies!</p>
                     <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">💰 Cost: 40 Coins</p>
                     <button class="button-primary buy-skill-btn" data-skill="punchPower" data-cost="40">Buy Now!</button>
                 </div>
-                <div class="p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #20B2AA, #48D1CC); animation: float 4s ease-in-out infinite; animation-delay: -3s;">
+                <div class="shop-skill-card p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #20B2AA, #48D1CC);">
                     <h3 class="text-3xl font-bold text-white mb-2">🕊️ Flight</h3>
                     <p class="text-lg text-teal-100 mb-4 font-semibold">Soar through the skies!</p>
                     <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">💰 Cost: 50 Coins</p>
