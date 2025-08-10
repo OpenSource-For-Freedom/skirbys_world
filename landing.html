@@ -267,6 +267,8 @@
             countdownElement.textContent = `Auto-starting in ${countdown}s...`;
             countdown--;
             if (countdown < 0 && !redirectStopped) {
+                // Try autostart first, with fallback
+                console.log("Landing page: Redirecting to game with autostart...");
                 window.location.href = './game.html?autostart=true';
             }
         };
@@ -274,10 +276,14 @@
         updateCountdown();
         const interval = setInterval(updateCountdown, 1000);
         
-        // Stop countdown when user clicks any game link
+        // Add click handlers to all game links
         const gameLinks = document.querySelectorAll('a[href*="game.html"]');
         gameLinks.forEach(link => {
-            link.addEventListener('click', stopAutoRedirect);
+            link.addEventListener('click', (e) => {
+                console.log("Landing page: Game link clicked, navigating...");
+                stopAutoRedirect();
+                // Let the default behavior continue
+            });
         });
         
         // Also stop countdown if user navigates away for any reason
@@ -289,6 +295,23 @@
                 stopAutoRedirect();
             }
         });
+        
+        // Add a backup message in case of issues
+        setTimeout(() => {
+            if (!redirectStopped) {
+                console.log("Landing page: Backup system active");
+                const backupNotice = document.createElement('div');
+                backupNotice.className = 'fixed top-4 left-4 bg-blue-600/90 text-white px-4 py-2 rounded-lg text-sm max-w-xs';
+                backupNotice.innerHTML = '💡 <strong>Game Loading...</strong><br>If it doesn\'t start automatically, click "PLAY NOW!" above.';
+                document.body.appendChild(backupNotice);
+                
+                setTimeout(() => {
+                    if (backupNotice.parentNode) {
+                        backupNotice.remove();
+                    }
+                }, 5000);
+            }
+        }, AUTO_REDIRECT_TIMEOUT * 1000 + 2000); // Show after auto-redirect should have happened
     </script>
 </body>
 </html>
