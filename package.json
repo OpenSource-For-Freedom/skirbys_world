@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "python3 -m http.server 8000",
     "build": "npm run clean && npm run build:copy && npm run build:validate",
-    "build:copy": "mkdir -p dist && cp -r src dist/ && cp -r public dist/ && cp game.html dist/game.html && cp landing.html dist/index.html && cp IMG_2133.jpeg dist/ && cp LICENSE dist/ && cp README.md dist/",
+    "build:copy": "mkdir -p dist && cp -r src dist/ && cp -r public dist/ && cp game.html dist/game.html && cp landing.html dist/index.html && cp IMG_2133.jpeg dist/ && cp LICENSE dist/ && cp README.md dist/ && npm run build:timestamps",
+    "build:timestamps": "node -e \"const fs = require('fs'); const now = new Date(); const buildDate = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0]; const timestamp = Date.now(); let content = fs.readFileSync('dist/index.html', 'utf8'); content = content.replace(/{{ BUILD_TIMESTAMP }}/g, timestamp).replace(/{{ BUILD_DATE }}/g, buildDate); fs.writeFileSync('dist/index.html', content);\"",
     "build:validate": "node -e \"const fs = require('fs'); const files = ['dist/index.html', 'dist/game.html', 'dist/src/player.js', 'dist/public/game.js']; files.forEach(f => { if (!fs.existsSync(f)) { console.error('Build validation failed: Missing', f); process.exit(1); } }); console.log('✅ Build validation passed: All required files exist');\"",
     "test": "echo \"Running game validation tests...\" && npm run test:validate && npm run test:deployment",
     "test:validate": "node -e \"console.log('Game validation: All external dependencies (Tailwind CSS, Tone.js) are loaded via CDN and should be accessible.');\"",
