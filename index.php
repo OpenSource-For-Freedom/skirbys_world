@@ -21,9 +21,9 @@
 
         <!-- Intro Menu -->
         <div id="intro-menu">
-            <h1 class="game-title">🌟 SKIRBY'S WORLD 🌟</h1>
-            <p class="text-3xl mb-12 text-white font-bold drop-shadow-lg game-subtitle">Ready to begin your magical adventure? ✨</p>
-            <button id="startButton" class="button-primary">🚀 Start Adventure 🚀</button>
+            <h1 class="game-title">SKIRBY'S WORLD</h1>
+            <p class="text-3xl mb-12 text-white font-bold drop-shadow-lg game-subtitle">Ready to begin your magical adventure?</p>
+            <button id="startButton" class="button-primary">Start Adventure</button>
         </div>
 
         <!-- Game UI (Score, Health) -->
@@ -38,50 +38,50 @@
 
         <!-- Shop UI (Initially hidden) -->
         <div id="shop-ui" class="hidden">
-            <h2 class="text-5xl font-extrabold my-4 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(50, 205, 50, 0.8);">💫 Skirbys Skill Shop 💫</h2>
-            <p class="text-xl mb-8 text-white font-bold drop-shadow-lg">Spend your coins wisely! ✨</p>
+            <h2 class="text-5xl font-extrabold my-4 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(50, 205, 50, 0.8);">Skirbys Skill Shop</h2>
+            <p class="text-xl mb-8 text-white font-bold drop-shadow-lg">Spend your coins wisely!</p>
             <!-- Modified grid for responsiveness -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl my-auto">
                 <div class="shop-skill-card p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #1E90FF, #87CEEB);">
-                    <h3 class="text-3xl font-bold text-white mb-2">🚀 Super Jump</h3>
+                    <h3 class="text-3xl font-bold text-white mb-2">Super Jump</h3>
                     <p class="text-lg text-blue-100 mb-4 font-semibold">Jump even higher!</p>
-                    <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">💰 Cost: 20 Coins</p>
+                    <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">Cost: 20 Coins</p>
                     <button class="button-primary buy-skill-btn" data-skill="superJump" data-cost="20">Buy Now!</button>
                 </div>
                 <div class="shop-skill-card p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #FF6347, #FF4500);">
-                    <h3 class="text-3xl font-bold text-white mb-2">🌪️ Spin Attack</h3>
+                    <h3 class="text-3xl font-bold text-white mb-2">Spin Attack</h3>
                     <p class="text-lg text-red-100 mb-4 font-semibold">Defeat enemies with a spin!</p>
-                    <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">💰 Cost: 30 Coins</p>
+                    <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">Cost: 30 Coins</p>
                     <button class="button-primary buy-skill-btn" data-skill="spinAttack" data-cost="30">Buy Now!</button>
                 </div>
                  <div class="shop-skill-card p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #9932CC, #DDA0DD);">
-                    <h3 class="text-3xl font-bold text-white mb-2">👊 Punch Power</h3>
+                    <h3 class="text-3xl font-bold text-white mb-2">Punch Power</h3>
                     <p class="text-lg text-purple-100 mb-4 font-semibold">One-shot most enemies!</p>
-                    <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">💰 Cost: 40 Coins</p>
+                    <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">Cost: 40 Coins</p>
                     <button class="button-primary buy-skill-btn" data-skill="punchPower" data-cost="40">Buy Now!</button>
                 </div>
                 <div class="shop-skill-card p-6 rounded-2xl shadow-xl text-center border-4 border-white" style="background: linear-gradient(135deg, #20B2AA, #48D1CC);">
-                    <h3 class="text-3xl font-bold text-white mb-2">🕊️ Flight</h3>
+                    <h3 class="text-3xl font-bold text-white mb-2">Flight</h3>
                     <p class="text-lg text-teal-100 mb-4 font-semibold">Soar through the skies!</p>
-                    <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">💰 Cost: 50 Coins</p>
+                    <p class="text-2xl font-bold text-yellow-300 mb-4 drop-shadow-lg">Cost: 50 Coins</p>
                     <button class="button-primary buy-skill-btn" data-skill="flight" data-cost="50">Buy Now!</button>
                 </div>
             </div>
-            <button id="continueGameButton" class="button-primary mt-8">✨ Continue Adventure ✨</button>
+            <button id="continueGameButton" class="button-primary mt-8">Continue Adventure</button>
         </div>
 
         <!-- Game Over UI (Initially hidden) -->
         <div id="game-over-ui" class="hidden">
-            <h2 class="text-6xl font-extrabold mb-8 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(255, 69, 0, 0.8); background: linear-gradient(45deg, #FF4500, #FF6347); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">💀 Game Over! 💀</h2>
-            <p class="text-2xl mb-12 text-white font-bold drop-shadow-lg">Skirbys adventure has ended... 😢</p>
-            <button id="restartButton" class="button-primary">🔄 Try Again 🔄</button>
+            <h2 class="text-6xl font-extrabold mb-8 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(255, 69, 0, 0.8); background: linear-gradient(45deg, #FF4500, #FF6347); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Game Over!</h2>
+            <p class="text-2xl mb-12 text-white font-bold drop-shadow-lg">Skirbys adventure has ended...</p>
+            <button id="restartButton" class="button-primary">Try Again</button>
         </div>
 
         <!-- Boss Battle UI (Initially hidden) -->
         <div id="boss-battle-ui" class="hidden">
-            <h2 class="text-6xl font-extrabold mb-8 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(138, 43, 226, 0.8); background: linear-gradient(45deg, #8A2BE2, #9932CC); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">⚔️ Boss Battle! ⚔️</h2>
-            <p class="text-2xl mb-12 text-white font-bold drop-shadow-lg">Prepare to face the Soap Boss! 🧼</p>
-            <button id="startBossBattleButton" class="button-primary">⚡ Engage! ⚡</button>
+            <h2 class="text-6xl font-extrabold mb-8 text-white drop-shadow-lg" style="text-shadow: 0 0 20px rgba(138, 43, 226, 0.8); background: linear-gradient(45deg, #8A2BE2, #9932CC); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Boss Battle!</h2>
+            <p class="text-2xl mb-12 text-white font-bold drop-shadow-lg">Prepare to face the Soap Boss!</p>
+            <button id="startBossBattleButton" class="button-primary">Engage!</button>
         </div>
 
         <!-- Cheat Code Input -->
