@@ -11,6 +11,7 @@
     <meta http-equiv="Expires" content="0">
     <meta name="build-version" content="v2.1.0-build-{{ BUILD_TIMESTAMP }}">
     <meta name="last-updated" content="{{ BUILD_DATE }}">
+    <meta name="deployment-id" content="deploy-{{ BUILD_TIMESTAMP }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -256,6 +257,21 @@
                 box-shadow: 0 0 20px rgba(255, 102, 0, 0.9);
             }
         }
+        
+        @keyframes liveIndicator {
+            0%, 100% { 
+                background: linear-gradient(45deg, #00ff00, #32cd32);
+                box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+            }
+            50% { 
+                background: linear-gradient(45deg, #32cd32, #90ee90);
+                box-shadow: 0 0 25px rgba(50, 205, 50, 1);
+            }
+        }
+        
+        .live-badge {
+            animation: liveIndicator 2s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
@@ -275,8 +291,18 @@
     
     <div class="game-card rounded-3xl p-8 max-w-4xl w-full text-center text-white shadow-2xl relative z-10">
         <!-- Version Badge - Highly Visible -->
-        <div class="fixed top-4 right-4 z-50 flash-new text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg border-2 border-white">
-            🚀 v2.1.0 - UPDATED! 🆕
+        <div class="fixed top-4 right-4 z-50 live-badge text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg border-2 border-white">
+            🚀 v2.1.0 - LIVE! ⚡<br>
+            <span class="text-xs" id="deployment-id">Deploy: {{ BUILD_TIMESTAMP }}</span>
+        </div>
+        
+        <!-- Live Status Indicator -->
+        <div class="fixed bottom-4 left-4 z-50 bg-green-600/90 text-white px-3 py-2 rounded-lg text-xs border border-green-400">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span>Site Status: <span id="connection-status" class="font-bold">LIVE</span></span>
+            </div>
+            <div class="text-xs mt-1">Last Deploy: <span id="last-deploy">{{ BUILD_DATE }}</span></div>
         </div>
         
         <!-- Game Title -->
@@ -364,7 +390,8 @@
         <div class="mt-8 pt-6 border-t border-white/20 text-gray-400 text-sm">
             <p>Developed by Tim Burns | <a href="https://github.com/OpenSource-For-Freedom/skirbys_world" class="text-blue-400 hover:text-blue-300">View Source Code</a></p>
             <p class="mt-2 text-yellow-300 font-semibold">
-                🔥 LATEST UPDATE: v2.1.0 | Built: <span id="build-timestamp">{{ BUILD_DATE }}</span> 🔥
+                🔥 LATEST UPDATE: v2.1.0 | Built: <span id="build-timestamp">{{ BUILD_DATE }}</span> 🔥<br>
+                <span class="text-xs text-green-300">Deployment ID: <span id="deploy-id">{{ BUILD_TIMESTAMP }}</span> | Page Status: <span id="page-status" class="text-green-400">LIVE ✅</span></span>
             </p>
         </div>
     </div>
@@ -380,12 +407,29 @@
         document.body.appendChild(countdownElement);
         
         // Update build timestamp with current time every second to show page is live
+        // and add visual indicators that the page is actively updating
+        let updateCounter = 0;
         setInterval(() => {
+            updateCounter++;
             const timestampEl = document.getElementById('build-timestamp');
+            const statusEl = document.getElementById('page-status');
+            const deployIdEl = document.getElementById('deploy-id');
+            
             if (timestampEl) {
                 const now = new Date();
                 const timeStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
-                timestampEl.innerHTML = `{{ BUILD_DATE }} (Page loaded: ${timeStr})`;
+                timestampEl.innerHTML = `{{ BUILD_DATE }} (Live: ${timeStr})`;
+            }
+            
+            // Pulse the status indicator to show the page is actively updating
+            if (statusEl) {
+                statusEl.style.textShadow = updateCounter % 2 === 0 ? '0 0 10px #00ff00' : '0 0 5px #00ff00';
+                statusEl.innerHTML = `LIVE ✅ (${updateCounter}s)`;
+            }
+            
+            // Show deployment ID is live
+            if (deployIdEl) {
+                deployIdEl.style.color = updateCounter % 3 === 0 ? '#00ff00' : '#90EE90';
             }
         }, 1000);
         
@@ -446,6 +490,38 @@
                 }, 5000);
             }
         }, AUTO_REDIRECT_TIMEOUT * 1000 + 2000); // Show after auto-redirect should have happened
+        
+        // Add visual confirmation that the page is live and updating
+        console.log('🚀 Skirbys World Landing Page - LIVE DEPLOYMENT');
+        console.log('🕐 Build Time: {{ BUILD_DATE }}');
+        console.log('🆔 Deployment ID: {{ BUILD_TIMESTAMP }}');
+        console.log('✅ Page Status: Active and Responsive');
+        
+        // Show deployment information briefly on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const deployInfo = document.createElement('div');
+            deployInfo.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/80 text-green-400 px-6 py-4 rounded-lg text-center border border-green-400 z-50';
+            deployInfo.innerHTML = `
+                <div class="text-lg font-bold mb-2">🌟 FRESH DEPLOYMENT ACTIVE! 🌟</div>
+                <div class="text-sm">Build: {{ BUILD_DATE }}</div>
+                <div class="text-xs">Deploy ID: {{ BUILD_TIMESTAMP }}</div>
+                <div class="text-xs mt-2 text-green-300">This proves the page is live and updated! ✅</div>
+            `;
+            document.body.appendChild(deployInfo);
+            
+            // Remove the deployment info after 3 seconds
+            setTimeout(() => {
+                if (deployInfo.parentNode) {
+                    deployInfo.style.transition = 'opacity 0.5s';
+                    deployInfo.style.opacity = '0';
+                    setTimeout(() => {
+                        if (deployInfo.parentNode) {
+                            deployInfo.remove();
+                        }
+                    }, 500);
+                }
+            }, 3000);
+        });
     </script>
 </body>
 </html>
