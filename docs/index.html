@@ -3,525 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skirbys World - Game Landing</title>
+    <title>Skirbys World - The Ultimate Adventure</title>
     
-    <!-- Cache-busting and version control -->
+    <!-- Basic cache control -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="build-version" content="v2.1.0-build-1754905620722">
-    <meta name="last-updated" content="2025-08-11 09:47:00">
-    <meta name="deployment-id" content="deploy-1754905620722">
+    <meta name="build-version" content="v2.1.0-build-1754906014581">
+    <meta name="last-updated" content="2025-08-11 09:53:34">
+    <meta name="deployment-id" content="deploy-1754906014581">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: 
-                /* Floating clouds layer */
-                radial-gradient(ellipse 300px 100px at 20% 20%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(ellipse 250px 80px at 80% 30%, rgba(255, 255, 255, 0.7), transparent),
-                radial-gradient(ellipse 350px 120px at 50% 60%, rgba(255, 255, 255, 0.6), transparent),
-                radial-gradient(ellipse 200px 70px at 15% 80%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(ellipse 280px 90px at 85% 75%, rgba(255, 255, 255, 0.7), transparent),
-                /* Skirby's World sky gradient */
-                linear-gradient(180deg, 
-                    #87CEEB 0%,    /* Sky blue */
-                    #98D8E8 25%,   /* Light blue */
-                    #B4E7F1 50%,   /* Lighter blue */
-                    #32CD32 85%,   /* Grass green */
-                    #228B22 100%   /* Forest green */
-                );
-            background-size: 
-                300px 100px, 250px 80px, 350px 120px, 200px 70px, 280px 90px,
-                100% 100%;
-            background-position:
-                20% 20%, 80% 30%, 50% 60%, 15% 80%, 85% 75%,
-                center center;
-            animation: gradientShift 8s ease infinite, cloudsFloat 20s ease infinite;
+        .mario-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, 
+                #4FC3F7 0%,     /* Mario sky blue */
+                #81C784 85%,    /* Mario grass green */
+                #4CAF50 100%    /* Darker green ground */
+            );
             min-height: 100vh;
             overflow-x: hidden;
         }
         
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes cloudsFloat {
-            0%, 100% { 
-                background-position:
-                    20% 20%, 80% 30%, 50% 60%, 15% 80%, 85% 75%,
-                    center center;
-            }
-            25% { 
-                background-position:
-                    25% 18%, 85% 28%, 45% 62%, 10% 82%, 90% 73%,
-                    center center;
-            }
-            50% { 
-                background-position:
-                    30% 22%, 75% 32%, 55% 58%, 20% 78%, 80% 77%,
-                    center center;
-            }
-            75% { 
-                background-position:
-                    15% 24%, 90% 26%, 40% 64%, 25% 84%, 95% 71%,
-                    center center;
-            }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-10px) scale(1.05); }
-        }
-        
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
-            50% { opacity: 1; transform: scale(1) rotate(180deg); }
-        }
-        
-        .game-card {
-            backdrop-filter: blur(15px);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 192, 203, 0.15));
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .play-button {
-            background: 
-                /* Button highlight */
-                linear-gradient(45deg, 
-                    #FF1493,    /* Deep pink */
-                    #FF6347,    /* Tomato */
-                    #FFD700,    /* Gold */
-                    #FF69B4,    /* Hot pink */
-                    #FF4500     /* Orange red */
-                );
-            background-size: 300% 300%;
-            animation: gradientShift 3s ease infinite;
-            color: white;
-            padding: 20px 40px;
-            border-radius: 15px;
-            font-size: 1.8rem;
-            font-weight: 900;
-            cursor: pointer;
-            border: none;
-            /* Block-style 3D effect */
-            box-shadow: 
-                0 6px 0 #C71585,        /* Bottom shadow */
-                0 8px 0 #B22222,        /* Deeper shadow */
-                0 12px 15px rgba(255, 20, 147, 0.4),  /* Outer glow */
-                inset 0 3px 0 rgba(255, 255, 255, 0.4),  /* Top highlight */
-                inset 0 -2px 0 rgba(0, 0, 0, 0.2);       /* Bottom inner shadow */
-            transition: all 0.15s ease;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            /* Bold game-style font appearance */
-            font-family: 'Arial Black', Arial, sans-serif;
-        }
-            animation: gradientShift 3s ease infinite, bounce 2s ease-in-out infinite;
-            transition: all 0.3s ease;
-            transform: scale(1);
-            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
-            border: 3px solid #FFB6C1;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            font-weight: 900;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .play-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            animation: shine 2s linear infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        
-        .play-button:hover {
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.6);
-            animation: bounce 0.5s ease-in-out infinite;
-        }
-        
-        .feature-card {
-            background: linear-gradient(135deg, rgba(152, 251, 152, 0.2), rgba(135, 206, 235, 0.2));
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            animation: float 4s ease-in-out infinite;
-        }
-        
-        .feature-card:nth-child(2n) {
-            animation-delay: -1s;
-        }
-        
-        .feature-card:nth-child(3n) {
-            animation-delay: -2s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 15px 25px rgba(255, 105, 180, 0.3);
-            background: linear-gradient(135deg, rgba(255, 182, 193, 0.3), rgba(255, 105, 180, 0.2));
-        }
-        
-        .skirby-stars {
+        .mario-clouds {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 1;
         }
         
-        .star {
+        .cloud {
             position: absolute;
-            color: #FFD700;
-            font-size: 20px;
-            animation: sparkle 3s ease-in-out infinite;
+            color: white;
+            font-size: 48px;
+            opacity: 0.8;
+            animation: cloudFloat 15s linear infinite;
         }
         
-        .star:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-        .star:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
-        .star:nth-child(3) { top: 60%; left: 5%; animation-delay: 1s; }
-        .star:nth-child(4) { top: 80%; right: 10%; animation-delay: 1.5s; }
-        .star:nth-child(5) { top: 40%; right: 25%; animation-delay: 2s; }
-        .star:nth-child(6) { top: 15%; left: 70%; animation-delay: 2.5s; }
+        .cloud:nth-child(1) { top: 10%; left: -10%; animation-delay: 0s; }
+        .cloud:nth-child(2) { top: 25%; left: -15%; animation-delay: -5s; }
+        .cloud:nth-child(3) { top: 15%; left: -20%; animation-delay: -10s; }
         
-        .game-title {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 2rem;
-            background: linear-gradient(45deg, 
-                #FFD700,    /* Gold */
-                #FF6347,    /* Tomato */
-                #FFD700,    /* Gold */
-                #FF1493,    /* Deep pink */
-                #FFD700     /* Gold */
-            );
+        @keyframes cloudFloat {
+            from { transform: translateX(0); }
+            to { transform: translateX(120vw); }
+        }
+        
+        .mario-button {
+            background: linear-gradient(to bottom, #FF6B35, #D84315);
+            border: 4px solid #FFFFFF;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            padding: 16px 32px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 0 #B71C1C, 0 8px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            text-transform: uppercase;
+        }
+        
+        .mario-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #B71C1C, 0 12px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .mario-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #B71C1C, 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mario-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 4px solid #FFC107;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mario-title {
+            background: linear-gradient(45deg, #FF5722, #FFC107, #4CAF50, #2196F3);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease infinite;
-            text-shadow: 
-                3px 3px 0 rgba(0, 0, 0, 0.8),
-                6px 6px 0 rgba(0, 0, 0, 0.5);
-            font-family: 'Arial Black', Arial, sans-serif;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            position: relative;
+            animation: colorShift 3s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
-        .controls-section {
-            background: linear-gradient(135deg, rgba(240, 230, 140, 0.2), rgba(255, 182, 193, 0.2));
-            border: 2px solid rgba(255, 215, 0, 0.4);
-            backdrop-filter: blur(10px);
+        @keyframes colorShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         
-        .flash-new {
-            animation: flashNew 1s ease-in-out infinite alternate;
+        .feature-box {
+            background: linear-gradient(135deg, #2196F3, #03A9F4);
+            border: 3px solid white;
+            border-radius: 12px;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s ease;
         }
         
-        @keyframes flashNew {
-            0% { 
-                background: linear-gradient(45deg, #ff0000, #ff6600);
-                transform: scale(1);
-                box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
-            }
-            100% { 
-                background: linear-gradient(45deg, #ff6600, #ffaa00);
-                transform: scale(1.05);
-                box-shadow: 0 0 20px rgba(255, 102, 0, 0.9);
-            }
+        .feature-box:hover {
+            transform: scale(1.05);
         }
         
-        @keyframes liveIndicator {
-            0%, 100% { 
-                background: linear-gradient(45deg, #00ff00, #32cd32);
-                box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
-            }
-            50% { 
-                background: linear-gradient(45deg, #32cd32, #90ee90);
-                box-shadow: 0 0 25px rgba(50, 205, 50, 1);
-            }
+        .feature-box.green {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
         }
         
-        .live-badge {
-            animation: liveIndicator 2s ease-in-out infinite;
+        .feature-box.orange {
+            background: linear-gradient(135deg, #FF9800, #FFB74D);
+        }
+        
+        .feature-box.purple {
+            background: linear-gradient(135deg, #9C27B0, #BA68C8);
+        }
+        
+        /* Mario-style pipe decoration */
+        .pipe {
+            position: absolute;
+            bottom: 0;
+            right: 20px;
+            width: 60px;
+            height: 120px;
+            background: linear-gradient(to bottom, #4CAF50, #388E3C);
+            border: 3px solid #2E7D32;
+            border-radius: 8px 8px 0 0;
+            z-index: 1;
+        }
+        
+        .pipe::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -8px;
+            width: 76px;
+            height: 25px;
+            background: linear-gradient(to bottom, #4CAF50, #388E3C);
+            border: 3px solid #2E7D32;
+            border-radius: 8px;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4">
-    <!-- Animated background stars and game elements -->
-    <div class="skirby-stars">
-        <div class="star">⭐</div>
-        <div class="star">✨</div>
-        <div class="star">🌟</div>
-        <div class="star">💫</div>
-        <div class="star">🪙</div>
-        <div class="star">🍄</div>
-        <div class="star">⚡</div>
-        <div class="star">🎁</div>
-        <div class="star">⭐</div>
-        <div class="star">✨</div>
+<body class="flex flex-col items-center justify-center p-4 relative">
+    <!-- Mario-style floating clouds -->
+    <div class="mario-clouds">
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
+        <div class="cloud">☁️</div>
     </div>
     
-    <div class="game-card rounded-3xl p-8 max-w-4xl w-full text-center text-white shadow-2xl relative z-10">
-        <!-- Version Badge - Highly Visible -->
-        <div class="fixed top-4 right-4 z-50 live-badge text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg border-2 border-white">
-            🚀 v2.1.0 - LIVE! ⚡<br>
-            <span class="text-xs" id="deployment-id">Deploy: 1754905620722</span>
-        </div>
-        
-        <!-- Live Status Indicator -->
-        <div class="fixed bottom-4 left-4 z-50 bg-green-600/90 text-white px-3 py-2 rounded-lg text-xs border border-green-400">
-            <div class="flex items-center gap-2">
-                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span>Site Status: <span id="connection-status" class="font-bold">LIVE</span></span>
-            </div>
-            <div class="text-xs mt-1">Last Deploy: <span id="last-deploy">2025-08-11 09:47:00</span></div>
-        </div>
-        
+    <!-- Mario-style pipe decoration -->
+    <div class="pipe"></div>
+    
+    <div class="mario-card p-8 max-w-4xl w-full text-center relative z-10">
         <!-- Game Title -->
-        <h1 class="game-title text-6xl font-extrabold mb-4">
-            🌟 Skirbys World 🌟
+        <h1 class="mario-title mario-font text-4xl md:text-6xl font-bold mb-6">
+            SKIRBYS WORLD
         </h1>
         
-        <!-- Game Description -->
-        <p class="text-xl mb-8 text-white font-bold max-w-2xl mx-auto drop-shadow-lg">
-            Help Skirby on his magical blocky adventure! 🎈 A vibrant 2D platformer featuring 
-            procedurally generated levels, amazing skill upgrades, and epic boss battles! ⭐
+        <!-- Subtitle -->
+        <p class="text-xl md:text-2xl mb-8 text-gray-800 font-semibold">
+            🌟 An Epic Super Mario-Style Adventure! 🌟
+        </p>
+        
+        <!-- Main Description -->
+        <p class="text-lg mb-8 text-gray-700 max-w-2xl mx-auto">
+            Help Skirby collect coins, defeat enemies, and explore amazing procedurally generated levels! 
+            Jump, run, and unlock special abilities in this classic platformer adventure.
         </p>
 
-        <!-- Play Button -->
+        <!-- Screenshot -->
         <div class="mb-8">
-            <a href="./game.html?autostart=true" class="play-button inline-block px-12 py-4 text-2xl font-bold text-white rounded-full no-underline relative z-10">
-                🚀 PLAY NOW! 🚀
+            <img src="./IMG_2133.jpeg" alt="Skirbys World Screenshot" class="rounded-xl mx-auto max-w-full h-auto shadow-lg border-4 border-yellow-400">
+        </div>
+
+        <!-- Big Play Button -->
+        <div class="mb-8">
+            <a href="./game.html?autostart=true" class="mario-button inline-block text-white no-underline">
+                🚀 START GAME 🚀
             </a>
         </div>
 
-        <!-- Game Screenshot -->
-        <div class="mb-8">
-            <img src="./IMG_2133.jpeg" alt="Skirbys World Screenshot" class="rounded-2xl mx-auto max-w-full h-auto shadow-lg">
-        </div>
-
-        <!-- Features Grid -->
+        <!-- Quick Features Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <div class="feature-card rounded-xl p-4">
-                <div class="text-3xl mb-2">🏗️</div>
-                <h3 class="font-bold text-lg mb-1">Procedural Levels</h3>
-                <p class="text-sm text-gray-300">Randomly generated adventures</p>
+            <div class="feature-box">
+                <div class="text-2xl mb-2">🏗️</div>
+                <h3 class="font-bold text-lg mb-1">Random Levels</h3>
+                <p class="text-sm">Every playthrough is unique!</p>
             </div>
-            <div class="feature-card rounded-xl p-4">
-                <div class="text-3xl mb-2">⚡</div>
-                <h3 class="font-bold text-lg mb-1">Skill System</h3>
-                <p class="text-sm text-gray-300">Unlock special abilities</p>
+            <div class="feature-box green">
+                <div class="text-2xl mb-2">⚡</div>
+                <h3 class="font-bold text-lg mb-1">Power-Ups</h3>
+                <p class="text-sm">Unlock super abilities!</p>
             </div>
-            <div class="feature-card rounded-xl p-4">
-                <div class="text-3xl mb-2">👹</div>
-                <h3 class="font-bold text-lg mb-1">Boss Battles</h3>
-                <p class="text-sm text-gray-300">Epic challenging encounters</p>
+            <div class="feature-box orange">
+                <div class="text-2xl mb-2">👹</div>
+                <h3 class="font-bold text-lg mb-1">Boss Fights</h3>
+                <p class="text-sm">Epic challenging battles!</p>
             </div>
-            <div class="feature-card rounded-xl p-4">
-                <div class="text-3xl mb-2">🎵</div>
-                <h3 class="font-bold text-lg mb-1">Sound Effects</h3>
-                <p class="text-sm text-gray-300">Dynamic audio experience</p>
+            <div class="feature-box purple">
+                <div class="text-2xl mb-2">🪙</div>
+                <h3 class="font-bold text-lg mb-1">Collect Coins</h3>
+                <p class="text-sm">Gather coins to buy skills!</p>
             </div>
         </div>
 
-        <!-- Game Controls -->
-        <div class="controls-section text-left max-w-2xl mx-auto mb-8 p-6 rounded-2xl">
-            <h3 class="text-2xl font-bold mb-4 text-center">🎮 How to Play</h3>
-            <div class="grid md:grid-cols-2 gap-4 text-sm">
+        <!-- Simple Controls -->
+        <div class="bg-gray-100 rounded-xl p-6 mb-8">
+            <h3 class="text-xl font-bold mb-4 text-gray-800">🎮 Simple Controls</h3>
+            <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
                 <div>
-                    <h4 class="font-bold text-yellow-300 mb-2">🏃‍♂️ Movement:</h4>
-                    <ul class="space-y-1 text-white font-semibold">
-                        <li>• A/D or Arrow Keys: Move</li>
-                        <li>• Spacebar: Jump</li>
-                        <li>• W/S: Fly (with Flight skill)</li>
-                    </ul>
+                    <strong class="text-red-600">Move:</strong> A/D or Arrow Keys<br>
+                    <strong class="text-blue-600">Jump:</strong> Spacebar<br>
                 </div>
                 <div>
-                    <h4 class="font-bold text-yellow-300 mb-2">⚔️ Combat:</h4>
-                    <ul class="space-y-1 text-white font-semibold">
-                        <li>• E: Spin Attack</li>
-                        <li>• F: Punch Power</li>
-                        <li>• C: Cheat Codes</li>
-                    </ul>
+                    <strong class="text-green-600">Attack:</strong> E (Spin) / F (Punch)<br>
+                    <strong class="text-purple-600">Fly:</strong> W/S (when unlocked)<br>
                 </div>
             </div>
         </div>
 
-        <!-- Quick Start -->
-        <div class="border-t border-white/20 pt-6">
-            <p class="text-lg font-semibold mb-2 text-white">Ready to begin your magical adventure? ✨</p>
-            <p class="text-pink-200 mb-4 font-semibold">Collect coins, defeat enemies, and unlock amazing new abilities! 🌈</p>
-            
-            <!-- Alternative Play Button -->
-            <a href="./game.html?autostart=true" class="inline-block bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
-                🌟 START ADVENTURE 🌟
+        <!-- Secondary Play Button -->
+        <div class="mb-6">
+            <a href="./game.html?autostart=true" class="mario-button inline-block text-white no-underline">
+                🌟 PLAY NOW 🌟
             </a>
         </div>
 
         <!-- Footer -->
-        <div class="mt-8 pt-6 border-t border-white/20 text-gray-400 text-sm">
-            <p>Developed by Tim Burns | <a href="https://github.com/OpenSource-For-Freedom/skirbys_world" class="text-blue-400 hover:text-blue-300">View Source Code</a></p>
-            <p class="mt-2 text-yellow-300 font-semibold">
-                🔥 LATEST UPDATE: v2.1.0 | Built: <span id="build-timestamp">2025-08-11 09:47:00</span> 🔥<br>
-                <span class="text-xs text-green-300">Deployment ID: <span id="deploy-id">1754905620722</span> | Page Status: <span id="page-status" class="text-green-400">LIVE ✅</span></span>
-            </p>
+        <div class="text-center text-gray-600 text-sm">
+            <p>Created by Tim Burns | <a href="https://github.com/OpenSource-For-Freedom/skirbys_world" class="text-blue-600 hover:text-blue-800">View Source</a></p>
         </div>
     </div>
 
     <script>
-        // Auto-redirect after AUTO_REDIRECT_TIMEOUT seconds if user doesn't click
-        const AUTO_REDIRECT_TIMEOUT = 10;
-        let countdown = AUTO_REDIRECT_TIMEOUT;
-        let redirectStopped = false; // Flag to prevent redirect after user action
-        
-        const countdownElement = document.createElement('div');
-        countdownElement.className = 'fixed bottom-4 right-4 bg-black/50 text-white px-4 py-2 rounded-lg text-sm';
-        document.body.appendChild(countdownElement);
-        
-        // Update build timestamp with current time every second to show page is live
-        // and add visual indicators that the page is actively updating
-        let updateCounter = 0;
-        setInterval(() => {
-            updateCounter++;
-            const timestampEl = document.getElementById('build-timestamp');
-            const statusEl = document.getElementById('page-status');
-            const deployIdEl = document.getElementById('deploy-id');
-            
-            if (timestampEl) {
-                const now = new Date();
-                const timeStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
-                timestampEl.innerHTML = `2025-08-11 09:47:00 (Live: ${timeStr})`;
-            }
-            
-            // Pulse the status indicator to show the page is actively updating
-            if (statusEl) {
-                statusEl.style.textShadow = updateCounter % 2 === 0 ? '0 0 10px #00ff00' : '0 0 5px #00ff00';
-                statusEl.innerHTML = `LIVE ✅ (${updateCounter}s)`;
-            }
-            
-            // Show deployment ID is live
-            if (deployIdEl) {
-                deployIdEl.style.color = updateCounter % 3 === 0 ? '#00ff00' : '#90EE90';
-            }
-        }, 1000);
-        
-        const stopAutoRedirect = () => {
-            redirectStopped = true;
-            clearInterval(interval);
-            countdownElement.remove();
-        };
-        
-        const updateCountdown = () => {
-            if (redirectStopped) return;
-            
-            countdownElement.textContent = `Auto-starting in ${countdown}s...`;
-            countdown--;
-            if (countdown < 0 && !redirectStopped) {
-                // Try autostart first, with fallback
-                console.log("Landing page: Redirecting to game with autostart...");
-                window.location.href = './game.html?autostart=true';
-            }
-        };
-        
-        updateCountdown();
-        const interval = setInterval(updateCountdown, 1000);
-        
-        // Add click handlers to all game links
-        const gameLinks = document.querySelectorAll('a[href*="game.html"]');
-        gameLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                console.log("Landing page: Game link clicked, navigating...");
-                stopAutoRedirect();
-                // Let the default behavior continue
+        // Simple click tracking for play buttons
+        document.querySelectorAll('a[href*="game.html"]').forEach(link => {
+            link.addEventListener('click', () => {
+                console.log('Navigating to game...');
             });
         });
         
-        // Also stop countdown if user navigates away for any reason
-        window.addEventListener('beforeunload', stopAutoRedirect);
-        
-        // Stop countdown if page becomes hidden (user switches tabs, etc.)
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                stopAutoRedirect();
-            }
-        });
-        
-        // Add a backup message in case of issues
-        setTimeout(() => {
-            if (!redirectStopped) {
-                console.log("Landing page: Backup system active");
-                const backupNotice = document.createElement('div');
-                backupNotice.className = 'fixed top-4 left-4 bg-blue-600/90 text-white px-4 py-2 rounded-lg text-sm max-w-xs';
-                backupNotice.innerHTML = '💡 <strong>Game Loading...</strong><br>If it doesn\'t start automatically, click "PLAY NOW!" above.';
-                document.body.appendChild(backupNotice);
-                
-                setTimeout(() => {
-                    if (backupNotice.parentNode) {
-                        backupNotice.remove();
-                    }
-                }, 5000);
-            }
-        }, AUTO_REDIRECT_TIMEOUT * 1000 + 2000); // Show after auto-redirect should have happened
-        
-        // Add visual confirmation that the page is live and updating
-        console.log('🚀 Skirbys World Landing Page - LIVE DEPLOYMENT');
-        console.log('🕐 Build Time: 2025-08-11 09:47:00');
-        console.log('🆔 Deployment ID: 1754905620722');
-        console.log('✅ Page Status: Active and Responsive');
-        
-        // Show deployment information briefly on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const deployInfo = document.createElement('div');
-            deployInfo.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/80 text-green-400 px-6 py-4 rounded-lg text-center border border-green-400 z-50';
-            deployInfo.innerHTML = `
-                <div class="text-lg font-bold mb-2">🌟 FRESH DEPLOYMENT ACTIVE! 🌟</div>
-                <div class="text-sm">Build: 2025-08-11 09:47:00</div>
-                <div class="text-xs">Deploy ID: 1754905620722</div>
-                <div class="text-xs mt-2 text-green-300">This proves the page is live and updated! ✅</div>
-            `;
-            document.body.appendChild(deployInfo);
-            
-            // Remove the deployment info after 3 seconds
-            setTimeout(() => {
-                if (deployInfo.parentNode) {
-                    deployInfo.style.transition = 'opacity 0.5s';
-                    deployInfo.style.opacity = '0';
-                    setTimeout(() => {
-                        if (deployInfo.parentNode) {
-                            deployInfo.remove();
-                        }
-                    }, 500);
-                }
-            }, 3000);
-        });
+        // Disable the auto-redirect countdown that was causing confusion
+        console.log('🎮 Skirbys World - Clean Mario-themed Landing Page');
     </script>
 </body>
 </html>
