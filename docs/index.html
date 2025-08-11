@@ -9,9 +9,9 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="build-version" content="v2.1.0-build-1754879879123">
-    <meta name="last-updated" content="2025-08-11 02:37:59">
-    <meta name="deployment-id" content="deploy-1754879879123">
+    <meta name="build-version" content="v2.1.0-build-1754905620722">
+    <meta name="last-updated" content="2025-08-11 09:47:00">
+    <meta name="deployment-id" content="deploy-1754905620722">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -293,7 +293,7 @@
         <!-- Version Badge - Highly Visible -->
         <div class="fixed top-4 right-4 z-50 live-badge text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg border-2 border-white">
             🚀 v2.1.0 - LIVE! ⚡<br>
-            <span class="text-xs" id="deployment-id">Deploy: 1754879879123</span>
+            <span class="text-xs" id="deployment-id">Deploy: 1754905620722</span>
         </div>
         
         <!-- Live Status Indicator -->
@@ -302,7 +302,7 @@
                 <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span>Site Status: <span id="connection-status" class="font-bold">LIVE</span></span>
             </div>
-            <div class="text-xs mt-1">Last Deploy: <span id="last-deploy">2025-08-11 02:37:59</span></div>
+            <div class="text-xs mt-1">Last Deploy: <span id="last-deploy">2025-08-11 09:47:00</span></div>
         </div>
         
         <!-- Game Title -->
@@ -390,8 +390,8 @@
         <div class="mt-8 pt-6 border-t border-white/20 text-gray-400 text-sm">
             <p>Developed by Tim Burns | <a href="https://github.com/OpenSource-For-Freedom/skirbys_world" class="text-blue-400 hover:text-blue-300">View Source Code</a></p>
             <p class="mt-2 text-yellow-300 font-semibold">
-                🔥 LATEST UPDATE: v2.1.0 | Built: <span id="build-timestamp">2025-08-11 02:37:59</span> 🔥<br>
-                <span class="text-xs text-green-300">Deployment ID: <span id="deploy-id">1754879879123</span> | Page Status: <span id="page-status" class="text-green-400">LIVE ✅</span></span>
+                🔥 LATEST UPDATE: v2.1.0 | Built: <span id="build-timestamp">2025-08-11 09:47:00</span> 🔥<br>
+                <span class="text-xs text-green-300">Deployment ID: <span id="deploy-id">1754905620722</span> | Page Status: <span id="page-status" class="text-green-400">LIVE ✅</span></span>
             </p>
         </div>
     </div>
@@ -418,7 +418,7 @@
             if (timestampEl) {
                 const now = new Date();
                 const timeStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
-                timestampEl.innerHTML = `2025-08-11 02:37:59 (Live: ${timeStr})`;
+                timestampEl.innerHTML = `2025-08-11 09:47:00 (Live: ${timeStr})`;
             }
             
             // Pulse the status indicator to show the page is actively updating
@@ -493,8 +493,8 @@
         
         // Add visual confirmation that the page is live and updating
         console.log('🚀 Skirbys World Landing Page - LIVE DEPLOYMENT');
-        console.log('🕐 Build Time: 2025-08-11 02:37:59');
-        console.log('🆔 Deployment ID: 1754879879123');
+        console.log('🕐 Build Time: 2025-08-11 09:47:00');
+        console.log('🆔 Deployment ID: 1754905620722');
         console.log('✅ Page Status: Active and Responsive');
         
         // Show deployment information briefly on page load
@@ -503,8 +503,8 @@
             deployInfo.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/80 text-green-400 px-6 py-4 rounded-lg text-center border border-green-400 z-50';
             deployInfo.innerHTML = `
                 <div class="text-lg font-bold mb-2">🌟 FRESH DEPLOYMENT ACTIVE! 🌟</div>
-                <div class="text-sm">Build: 2025-08-11 02:37:59</div>
-                <div class="text-xs">Deploy ID: 1754879879123</div>
+                <div class="text-sm">Build: 2025-08-11 09:47:00</div>
+                <div class="text-xs">Deploy ID: 1754905620722</div>
                 <div class="text-xs mt-2 text-green-300">This proves the page is live and updated! ✅</div>
             `;
             document.body.appendChild(deployInfo);
