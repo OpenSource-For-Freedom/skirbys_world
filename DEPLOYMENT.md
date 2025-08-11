@@ -9,7 +9,7 @@ This document explains how Skirby's World is deployed to GitHub Pages using auto
 ## 📋 Deployment Architecture
 
 ### Overview
-Skirby's World uses GitHub Pages with automated deployment via GitHub Actions. The game features a landing page entry point and is built from a modular ES6 structure deployed as static HTML/CSS/JS files.
+Skirby's World uses GitHub Pages with automated deployment via GitHub Actions. The game features a landing page entry point and is built from a modular ES6 structure deployed as static HTML/CSS/JS files to a `/docs` directory.
 
 ### Key Components
 
@@ -31,16 +31,15 @@ Skirby's World uses GitHub Pages with automated deployment via GitHub Actions. T
        └── styles.css    # Game styling
    ```
 
-2. **Build Output** (`dist/` folder):
+2. **Build Output** (`docs/` folder):
    ```
    ├── index.html        # Landing page (from landing.html)
-   ├── game.html         # Main game (converted from index.php)
+   ├── game.html         # Main game (converted from game.html)
    ├── src/             # Copied game modules
    ├── public/          # Copied public assets
    ├── IMG_2133.jpeg    # Game screenshot
    ├── LICENSE          # License file
-   ├── README.md        # Documentation
-   └── DEPLOYMENT.md    # This deployment guide
+   └── README.md        # Documentation
    ```
 
 ## 🎮 Game Access
@@ -80,11 +79,13 @@ jobs:
         run: npm install
       - name: Build game
         run: npm run build
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+      - name: Commit and push docs
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/
+          git commit -m "Deploy GitHub Pages files to docs/" || exit 0
+          git push
 ```
 
 ### Build Process
@@ -93,20 +94,22 @@ jobs:
 
 **Script**: 
 ```bash
-mkdir -p dist && 
-cp -r src dist/ && 
-cp -r public dist/ && 
-cp index.php dist/index.html && 
-cp IMG_2133.jpeg dist/ && 
-cp LICENSE dist/ && 
-cp README.md dist/
+mkdir -p docs && 
+cp -r src docs/ && 
+cp -r public docs/ && 
+cp game.html docs/game.html && 
+cp landing.html docs/index.html && 
+cp IMG_2133.jpeg docs/ && 
+cp LICENSE docs/ && 
+cp README.md docs/
 ```
 
 **Key Steps**:
-1. Create `dist/` directory
+1. Create `docs/` directory
 2. Copy modular game files (`src/`, `public/`)
-3. Convert `index.php` → `index.html` for GitHub Pages compatibility
+3. Copy `game.html` and convert `landing.html` → `index.html` for GitHub Pages compatibility
 4. Copy assets and documentation
+5. Commit and push docs to main branch for GitHub Pages deployment
 
 ## 🧪 Local Testing
 
@@ -119,7 +122,7 @@ npm run dev
 ### Testing Built Version
 ```bash
 npm run build
-cd dist && python3 -m http.server 3000
+cd docs && python3 -m http.server 3000
 # Opens: http://localhost:3000/index.html
 ```
 
@@ -151,7 +154,7 @@ npm test  # Validates external dependencies
 
 1. **Game Not Loading**
    - Check browser console for module loading errors
-   - Verify all files exist in `dist/` folder
+   - Verify all files exist in `docs/` folder
    - Test with local server first
 
 2. **Styling Issues** 
