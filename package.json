@@ -6,14 +6,14 @@
   "scripts": {
     "dev": "python3 -m http.server 8000",
     "build": "npm run clean && npm run build:copy && npm run build:validate",
-    "build:copy": "mkdir -p dist && cp -r src dist/ && cp -r public dist/ && cp game.html dist/game.html && cp landing.html dist/index.html && cp IMG_2133.jpeg dist/ && cp LICENSE dist/ && cp README.md dist/ && npm run build:timestamps",
-    "build:timestamps": "node -e \"const fs = require('fs'); const now = new Date(); const buildDate = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0]; const timestamp = Date.now(); let content = fs.readFileSync('dist/index.html', 'utf8'); content = content.replace(/{{ BUILD_TIMESTAMP }}/g, timestamp).replace(/{{ BUILD_DATE }}/g, buildDate); fs.writeFileSync('dist/index.html', content);\"",
-    "build:validate": "node -e \"const fs = require('fs'); const files = ['dist/index.html', 'dist/game.html', 'dist/src/player.js', 'dist/public/game.js']; files.forEach(f => { if (!fs.existsSync(f)) { console.error('Build validation failed: Missing', f); process.exit(1); } }); console.log('✅ Build validation passed: All required files exist');\"",
+    "build:copy": "mkdir -p docs && cp -r src docs/ && cp -r public docs/ && cp game.html docs/game.html && cp landing.html docs/index.html && cp IMG_2133.jpeg docs/ && cp LICENSE docs/ && cp README.md docs/ && npm run build:timestamps",
+    "build:timestamps": "node -e \"const fs = require('fs'); const now = new Date(); const buildDate = now.toISOString().split('T')[0] + ' ' + now.toTimeString().split(' ')[0]; const timestamp = Date.now(); let content = fs.readFileSync('docs/index.html', 'utf8'); content = content.replace(/{{ BUILD_TIMESTAMP }}/g, timestamp).replace(/{{ BUILD_DATE }}/g, buildDate); fs.writeFileSync('docs/index.html', content);\"",
+    "build:validate": "node -e \"const fs = require('fs'); const files = ['docs/index.html', 'docs/game.html', 'docs/src/player.js', 'docs/public/game.js']; files.forEach(f => { if (!fs.existsSync(f)) { console.error('Build validation failed: Missing', f); process.exit(1); } }); console.log('✅ Build validation passed: All required files exist');\"",
     "test": "echo \"Running game validation tests...\" && npm run test:validate && npm run test:deployment",
     "test:validate": "node -e \"console.log('Game validation: All external dependencies (Tailwind CSS, Tone.js) are loaded via CDN and should be accessible.');\"",
     "test:deployment": "node -e \"const fs = require('fs'); console.log('Deployment test: Checking modular structure...'); const modules = ['src/player.js', 'src/platforms.js', 'src/boss.js']; modules.forEach(m => { if (!fs.existsSync(m)) { console.error('❌ Missing module:', m); process.exit(1); } }); console.log('✅ All game modules present for deployment');\"",
     "lint": "echo \"No linting configured for this HTML/JS game.\"",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf docs",
     "serve": "npm run dev"
   },
   "keywords": ["game", "platformer", "html5", "canvas", "javascript"],

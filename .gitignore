@@ -22,3 +22,6 @@ index.html
 # OS files
 .DS_Store
 Thumbs.db
+
+# Allow docs/index.html for GitHub Pages
+!docs/index.html
