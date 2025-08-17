@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <!-- Tone.js for sound effects -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
-    <link rel="stylesheet" href="public/styles.css">
+    <link rel="stylesheet" href="public/styles-enhanced.css">
 </head>
 <body>
-    <div id="game-container">
+    <div id="game-container" class="game-container">
         <!-- Loading Overlay -->
         <div id="loading-overlay" class="hidden">
             <div class="loading-spinner"></div>
@@ -20,9 +20,9 @@
         </div>
 
         <!-- Intro Menu -->
-        <div id="intro-menu">
+        <div id="intro-menu" class="intro-menu">
             <h1 class="game-title">SKIRBY'S WORLD</h1>
-            <p class="text-3xl mb-12 text-white font-bold drop-shadow-lg game-subtitle">Ready to begin your magical adventure?</p>
+            <p class="game-subtitle">Ready to begin your magical adventure?</p>
             <button id="startButton" class="button-primary">Start Adventure</button>
         </div>
 
