@@ -301,6 +301,7 @@
     const CANVAS_WIDTH = 1200;
     const CANVAS_HEIGHT = 675; // 16:9 aspect ratio
     const TOTAL_HANDCRAFTED_LEVELS = HANDCRAFTED_LEVEL_COUNT;
+    console.log(`Loaded ${TOTAL_HANDCRAFTED_LEVELS} handcrafted levels`);
 
         // Game State
         const GAME_STATE = {
@@ -754,7 +755,7 @@
 
             // Generate the first level
             currentLevelData = generateLevel(currentLevel, createLevelContext());
-            initializeBackgroundElements(); // Re-initialize background elements for new game
+            initializeBackgroundElements(currentLevelData?.theme); // Re-initialize background elements for new game
 
             updateUI();
         }
@@ -777,7 +778,7 @@
             player.facing = 1;
             cameraX = 0; // Reset camera for new level
             currentLevelData = generateLevel(currentLevel, createLevelContext()); // Generate new level data
-            initializeBackgroundElements(); // Re-initialize background elements for new level
+            initializeBackgroundElements(currentLevelData?.theme); // Re-initialize background elements for new level
         }
 
         /**
@@ -1148,6 +1149,10 @@
 
             // Collision detection and resolution for PLAYING state
             if (currentState === GAME_STATE.PLAYING && currentLevelData) {
+                if (currentLevelData.hazards && currentLevelData.hazards.length) {
+                    drawHazards(ctx, cameraX, currentLevelData.hazards, frameCounter);
+                }
+
                 currentLevelData.platforms.forEach(platform => {
                     if (checkCollision(player, platform)) {
                         // Calculate overlap to determine collision direction
@@ -1255,6 +1260,49 @@
                 // Filter out defeated enemies that have fallen off screen
                 currentLevelData.enemies = currentLevelData.enemies.filter(enemy => enemy.y < CANVAS_HEIGHT);
 
+                // Hazard interactions
+                if (currentLevelData.hazards && currentLevelData.hazards.length) {
+                    currentLevelData.hazards.forEach(hazard => {
+                        const overlapsX = player.x + player.width > hazard.x && player.x < hazard.x + hazard.width;
+                        const overlapsY = player.y + player.height > hazard.y && player.y < hazard.y + hazard.height;
+                        if (!overlapsX || !overlapsY) {
+                            return;
+                        }
+
+                        const applyInvincibility = (duration) => {
+                            player.isInvincible = true;
+                            player.invincibilityTimer = Math.max(player.invincibilityTimer, duration);
+                        };
+
+                        if (hazard.type === 'water') {
+                            player.onGround = false;
+                            player.dy = Math.min(player.dy + 0.4, 6);
+                            player.dx += (hazard.flowSpeed ?? 1) * 0.32 * (hazard.direction ?? 1);
+                            const maxY = hazard.y + hazard.height - player.height + 6;
+                            if (player.y < hazard.y) {
+                                player.y = hazard.y - player.height * 0.6;
+                            } else if (player.y > maxY) {
+                                player.y = maxY;
+                            }
+                            if (!player.isInvincible) {
+                                const damage = Math.max(1, hazard.damage ?? 1);
+                                player.health = Math.max(0, player.health - damage);
+                                updateUI();
+                                applyInvincibility(24);
+                            }
+                        } else if (hazard.type === 'lava') {
+                            if (!player.isInvincible) {
+                                const damage = Math.max(1, hazard.damage ?? 2);
+                                player.health = Math.max(0, player.health - damage);
+                                updateUI();
+                                const knockback = hazard.knockback || { x: 0, y: -14 };
+                                player.knockbackX = knockback.x;
+                                player.knockbackY = knockback.y;
+                                applyInvincibility(36);
+                            }
+                        }
+                    });
+                }
 
                 // Check for level completion (reaching exit)
                 const isCollidingWithExit = checkCollision(player, currentLevelData.exit);
@@ -1570,6 +1618,56 @@
         }
 
         // --- Background Drawing Functions ---
+
+        function drawHazards(ctx, cameraX, hazards, frameCounter) {
+            hazards.forEach(hazard => {
+                const drawX = hazard.x - cameraX;
+
+                if (hazard.type === 'water') {
+                    const waterGradient = ctx.createLinearGradient(0, hazard.y, 0, hazard.y + hazard.height);
+                    waterGradient.addColorStop(0, 'rgba(150, 220, 255, 0.95)');
+                    waterGradient.addColorStop(0.4, 'rgba(70, 160, 220, 0.9)');
+                    waterGradient.addColorStop(1, 'rgba(15, 70, 150, 0.95)');
+                    ctx.fillStyle = waterGradient;
+                    ctx.fillRect(drawX, hazard.y, hazard.width, hazard.height);
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(drawX, hazard.y);
+                    const waveSegments = Math.max(6, Math.floor(hazard.width / 32));
+                    for (let i = 0; i <= waveSegments; i++) {
+                        const segmentX = drawX + (i / waveSegments) * hazard.width;
+                        const phase = frameCounter * 0.08 + (segmentX - drawX) / (hazard.waveLength ?? 140);
+                        const crest = Math.sin(phase) * (hazard.waveAmplitude ?? 12);
+                        ctx.lineTo(segmentX, hazard.y + crest);
+                    }
+                    ctx.lineTo(drawX + hazard.width, hazard.y + hazard.height);
+                    ctx.lineTo(drawX, hazard.y + hazard.height);
+                    ctx.closePath();
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+                    ctx.fill();
+                    ctx.restore();
+                } else if (hazard.type === 'lava') {
+                    ctx.save();
+                    ctx.shadowColor = `rgba(255, 120, 0, ${hazard.glow ?? 0.65})`;
+                    ctx.shadowBlur = 28;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 0;
+                    const lavaGradient = ctx.createLinearGradient(0, hazard.y, 0, hazard.y + hazard.height);
+                    lavaGradient.addColorStop(0, 'rgba(255, 230, 130, 0.95)');
+                    lavaGradient.addColorStop(0.4, 'rgba(255, 120, 30, 0.95)');
+                    lavaGradient.addColorStop(1, 'rgba(120, 0, 0, 1)');
+                    ctx.fillStyle = lavaGradient;
+                    ctx.fillRect(drawX, hazard.y, hazard.width, hazard.height);
+                    ctx.shadowColor = 'transparent';
+
+                    const pulse = 4 + Math.sin(frameCounter * (hazard.pulseSpeed ?? 0.16)) * 4;
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+                    ctx.fillRect(drawX, hazard.y + hazard.height - pulse, hazard.width, 2);
+                    ctx.restore();
+                }
+            });
+        }
 
         /**
          * Draws clouds with parallax effect.
